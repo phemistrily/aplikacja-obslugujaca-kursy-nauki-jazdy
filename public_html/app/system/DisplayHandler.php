@@ -25,14 +25,27 @@ class DisplayHandler
 
   protected function render($applicationData)
   {
-    $this->systemData = [
-      'session' => $_SESSION
-      ,'get' => $_GET
-      ,'post'=> $_POST
-    ];
+    if (isset($_SESSION) && !empty($_SESSION))
+    {
+      $this->systemData = [
+        'session' => $_SESSION,
+        'get' => $_GET,
+        'post'=> $_POST
+      ];
+    }
+    else
+    {
+      $this->systemData = [
+        'get' => $_GET,
+        'post' => $_POST
+      ];
+    }
+    
+    
 
     $this->smarty->assign('applicationData',$applicationData);
     $this->smarty->assign('systemData',$this->systemData);
+    var_dump($this->smarty);
     $this->smarty->display('index.html');
     if(CONFIG['debug'] == true)
     {
