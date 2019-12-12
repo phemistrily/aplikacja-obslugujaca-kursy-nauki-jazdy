@@ -1,6 +1,6 @@
 <?php
-include 'ConnectionInterface.php';
-class SqlConnector implements ConnectionInterface
+//include 'ConnectionInterface.php';
+class SqlConnector// implements ConnectionInterface
 {
   public function __construct() 
   {
@@ -14,7 +14,7 @@ class SqlConnector implements ConnectionInterface
   }
   private function setConfig() 
   {
-    $this->database = 'product_managment';
+    $this->database = 'mord';
     $this->user =     'root';
     $this->password = '';
     $this->host =     'localhost';
@@ -58,7 +58,7 @@ class SqlConnector implements ConnectionInterface
   {
     if(empty($this->response))
     {
-      $response = $this->response->fetch();
+      $response = $this->response->fetch(PDO::FETCH_ASSOC);
       return $response;
     }
     else
@@ -70,8 +70,9 @@ class SqlConnector implements ConnectionInterface
   public function toArray()
   {
     $dataArray = array();
-    while($row = $this->response->fetch())
+    while($row = $this->response->fetch(PDO::FETCH_ASSOC))
     {
+      
       $dataArray[] = $row;
     }
     return $dataArray;

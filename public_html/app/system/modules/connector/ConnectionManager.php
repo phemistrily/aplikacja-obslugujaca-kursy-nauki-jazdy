@@ -14,7 +14,7 @@ class ConnectionManager
   {
     switch ($this->source) {
       case 'mysql':
-        include 'ConnectionManager.php';
+        include 'SqlConnector.php';
         $this->data = new SqlConnector();
         break;
       default:

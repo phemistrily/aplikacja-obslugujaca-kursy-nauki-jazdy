@@ -16,11 +16,13 @@ class ModuleController extends DisplayHandler
   {
     if(isset($_GET['mod']))
     {
-      new GetModHandler();
+      $module = new GetModHandler();
+      $this->applicationData = $module->getApplicationData();
     }
     else if (isset($_POST['form']))
     {
-      new PostFromHandler();
+      $form = new PostFromHandler();
+      $this->applicationData = $form->getApplicationData();
     }
     parent::render($this->applicationData);
   }

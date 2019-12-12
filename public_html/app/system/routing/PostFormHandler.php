@@ -1,6 +1,8 @@
 <?php
 class PostFormHandler
 {
+  public $applicationData;
+
   public function __construct()
   {
     $this->runHandler();
@@ -17,5 +19,10 @@ class PostFormHandler
         # code...
         break;
     }
+  }
+
+  public function getApplicationData()
+  {
+    return $this->applicationData;
   }
 }

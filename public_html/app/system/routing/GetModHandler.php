@@ -1,6 +1,8 @@
 <?php
 class GetModHandler
 {
+  private $applicationData = [];
+
   public function __construct()
   {
     $this->runHandler();
@@ -9,13 +11,19 @@ class GetModHandler
   private function runHandler()
   {
     switch ($_GET['mod']) {
-      case 'test':
-        # code...
+      case 'logowanie':
+        include_once('app/source/controllers/Users.php');
+        $users = new Users();
+        $this->applicationData['userList'] = $users->getUsers();
         break;
       
       default:
         # code...
         break;
     }
+  }
+  public function getApplicationData()
+  {
+    return $this->applicationData;
   }
 }
