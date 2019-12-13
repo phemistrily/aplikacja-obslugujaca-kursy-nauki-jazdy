@@ -2,6 +2,8 @@
 include 'DisplayHandler.php';
 require_once('routing/GetModHandler.php');
 require_once('routing/PostFormHandler.php');
+require_once 'modules/connector/ConnectionManager.php';
+require_once 'modules/connector/sql.php';
 class ModuleController extends DisplayHandler
 {
   public $applicationData;
