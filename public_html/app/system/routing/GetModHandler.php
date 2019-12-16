@@ -1,5 +1,7 @@
 <?php
-class GetModHandler
+require_once 'Handler.php';
+
+class GetModHandler extends Handler
 {
   private $applicationData = [];
 
@@ -12,8 +14,8 @@ class GetModHandler
   {
     switch ($_GET['mod']) {
       case 'logowanie':
-        include_once('app/source/controllers/Users.php');
-        $users = new Users();
+        parent::controller('Users');
+        $users = new UsersController();
         $this->applicationData['userList'] = $users->getUsers();
         break;
       

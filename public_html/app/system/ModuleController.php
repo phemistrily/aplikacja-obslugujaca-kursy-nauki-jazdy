@@ -11,6 +11,7 @@ class ModuleController extends DisplayHandler
   public function __construct()
   {
     parent::__construct();
+    Sql::connectSql1();
     $this->initialize();
   }
 
