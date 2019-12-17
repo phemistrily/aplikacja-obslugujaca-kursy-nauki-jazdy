@@ -3,7 +3,7 @@ require_once 'Handler.php';
 
 class GetModHandler extends Handler
 {
-  private $applicationData = [];
+  //private $applicationData = [];
 
   public function __construct()
   {
@@ -16,7 +16,7 @@ class GetModHandler extends Handler
       case 'logowanie':
         parent::controller('Users');
         $users = new UsersController();
-        $this->applicationData['userList'] = $users->getUsers();
+        //$this->applicationData['userList'] = $users->getUsers();
         break;
       
       default:
@@ -24,8 +24,9 @@ class GetModHandler extends Handler
         break;
     }
   }
+  /*
   public function getApplicationData()
   {
     return $this->applicationData;
-  }
+  }*/
 }
