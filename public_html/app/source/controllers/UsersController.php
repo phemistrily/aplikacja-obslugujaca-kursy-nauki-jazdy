@@ -7,9 +7,37 @@ class UsersController extends Controller
   {
     parent::model('Users');
     $this->users = new Users();
-    $this->getUsers();
   }
 
+
+  public function loginView(){
+    parent::$applicationData['headTitle'] = 'MORD | Logowanie';
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'logowanie';
+    
+  }
+
+  
+  public function registerView()
+  {
+    parent::$applicationData['headTitle'] = 'MORD | Rejestracja';
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'rejestracja';
+  }
+
+
+  public function loginUser()
+  {
+
+  }
+
+  public function registerUser()
+  {
+
+  }
+  /*
   public function getUsers()
   {
     $query = "SELECT * FROM users";
@@ -20,4 +48,5 @@ class UsersController extends Controller
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'index';
   }
+  */
 }

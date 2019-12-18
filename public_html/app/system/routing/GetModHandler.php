@@ -16,7 +16,12 @@ class GetModHandler extends Handler
       case 'logowanie':
         parent::controller('Users');
         $users = new UsersController();
-        //$this->applicationData['userList'] = $users->getUsers();
+        $users->loginView();
+        break;
+      case 'rejestracja':
+        parent::controller('Users');
+        $users = new UsersController();
+        $users->registerView();
         break;
       
       default:
