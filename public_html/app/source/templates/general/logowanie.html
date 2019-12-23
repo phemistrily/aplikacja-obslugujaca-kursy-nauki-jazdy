@@ -1,16 +1,29 @@
 {include file="layout/header.html"}
 
 
-<div class="headline">
-  Zaloguj się do systemu
-</div>
-<div>
+<div class="headline">Zaloguj się do systemu</div>
+<div class="formArea">
   <form action="/" method="POST">
-    <input type="text" name="email" placeholder="email" />
-    <input type="password" name="password" placeholder="hasło" />
-    <button name="form" value="login" type="submit">Zaloguj</button>
+    <div class="formDiv">
+      <input type="text" name="email" placeholder="E-mail" />
+    </div>
+    <div class="formDiv">
+      <input type="password" name="password" placeholder="Hasło" />
+    </div>
+    <div class="formDiv">
+      <button name="form" value="login" type="submit">Zaloguj</button>
+    </div>
   </form>
+  {if $systemData.get.msg eq 'w_errLogin'}
+  <div class="formDiv">
+    <div class="formErr">
+        Niepoprawny login lub hasło
+    </div>
+  </div>
+  {/if}
 </div>
+
+
 
 {include file="layout/footer.html"}
 

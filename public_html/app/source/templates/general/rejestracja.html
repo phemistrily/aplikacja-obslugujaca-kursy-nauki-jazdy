@@ -1,14 +1,25 @@
 {include file="layout/header.html"}
 
 
-<div class="headline">
-  Zarejestruj się w systemie
-</div>
-<div>
+<div class="headline">Zarejestruj się w systemie</div>
+<div class="formArea">
   <form action="/" method="POST">
-    <input type="text" name="login" placeholder="Login" />
-    <input type="password" name="password" placeholder="Hasło" />
-    <button name="form" value="login" type="submit">Zarejestruj</button>
+    <div class="formDiv">
+        <input type="text" name="firstname" placeholder="Imię" />
+    </div>
+    <div class="formDiv">
+        <input type="text" name="lastname" placeholder="Nazwisko" />
+    </div>
+    <div class="formDiv">
+        <input type="text" name="login" placeholder="E-mail" />
+    </div>
+    <div class="formDiv">
+        <input type="password" name="password" placeholder="Hasło" />
+    </div>
+    <div class="formDiv">
+        <button name="form" value="register" type="submit">Zarejestruj</button>
+    </div>
+    
   </form>
 </div>
 

@@ -3,9 +3,9 @@ body, div, span, img, ul, ol, li, a, p, hr, form, input, select, textarea, heade
 }
 
 body {
-	font-family: 'verdana';
+	font-family: 'Open Sans';
     font-size: 14px; 
-    font-weight: 300; 
+    font-weight: 400; 
     color: #343434;  
     background-color: #fff;
 }
@@ -33,15 +33,16 @@ a {
     padding: 0px 10px;
     color: #fff;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     transition: 200ms;
 }
 .accountMenu > a:hover {
     color: #232323;
 }
 .appHeader {
-    padding: 20px 0px;
+    padding: 20px 0px 30px;
     font-size: 30px;
+    font-weight: 600;
 }
 
 
@@ -62,18 +63,98 @@ a {
     padding: 20px 0px;
 }
 
-
+.headline {
+    padding: 5px 10px 10px;
+    border-bottom: 1px solid #e3e3e3;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #777;
+}
 /*-------------------------------------------------------*/
-/*style pól formularzy */
+/*style formularzy */
 /*-------------------------------------------------------*/
+.formArea {
+    width: 300px;
+    margin: 0px auto;
+}
+.formArea .formDiv {
+    margin: 15px 0px;
+}
+.formArea .formErr {
+    color: #B20000;
+}
 input, select, textarea, button {
-    font-family: 'verdana';
+    font-family: 'Open Sans';
     font-size: 14px; 
-    font-weight: 300; 
+    font-weight: 400; 
+    width: 100%;
+    box-sizing: border-box;
 }
 input {
     padding: 7px 10px;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
 }
+
+button {
+    padding: 7px;
+    background-color: #86b140;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 200ms;
+}
+button:hover {
+    color: #232323;
+}
 /*-------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------------------------------------------*/
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('./fonts/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('./fonts/OpenSans-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('./fonts/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('./fonts/OpenSans-ExtraBold.ttf');
+}
