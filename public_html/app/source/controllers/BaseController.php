@@ -1,5 +1,5 @@
 <?php
-abstract class Controller
+abstract class BaseController
 {
     public static $applicationData = [];
     /**
@@ -15,8 +15,15 @@ abstract class Controller
      */
     public function controller($controller) 
     {
-        require_once 'app/source/controllers/controller.php';
+        require_once 'app/source/controllers/BaseController.php';
         require_once 'app/source/controllers/'.$controller.'Controller.php';
+    }
+
+    /**
+     * redirect('uri')
+     */
+    public function redirect($uri){
+        header('Location: '.$uri);
     }
 }
 

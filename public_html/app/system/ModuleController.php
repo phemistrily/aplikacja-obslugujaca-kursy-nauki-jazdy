@@ -21,12 +21,15 @@ class ModuleController extends DisplayHandler
     if(isset($_GET['mod']))
     {
       $module = new GetModHandler();
-      //$this->applicationData = $module->getApplicationData();
     }
     else if (isset($_POST['form']))
     {
-      $form = new PostFromHandler();
-      //$this->applicationData = $form->getApplicationData();
+      $form = new PostFormHandler();
+    }
+    else 
+    {
+      ModuleController::$applicationData['headTitle'] = 'MORD | Strona główna';
+      ModuleController::$template = 'index';
     }
     parent::render(self::$applicationData, self::$template);
   }

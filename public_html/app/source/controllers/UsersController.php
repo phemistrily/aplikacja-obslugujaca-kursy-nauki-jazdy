@@ -1,5 +1,5 @@
 <?php
-class UsersController extends Controller
+class UsersController extends BaseController
 {
   private $users;
 
@@ -28,25 +28,21 @@ class UsersController extends Controller
   }
 
 
-  public function loginUser()
+  public function loginUser($post)
   {
-
+    $user = $this->users->loginUser($post['email'], $post['password']);
+    if($user)
+    {
+      parent::redirect('/?mod=dashboard&msg=s_loggedIn');
+    }
+    else
+    {
+      parent::redirect('/?mod=logowanie&msg=w_errLogin');
+    }
   }
 
   public function registerUser()
   {
 
   }
-  /*
-  public function getUsers()
-  {
-    $query = "SELECT * FROM users";
-    
-    Sql::$sql1->run($query);
-    parent::$applicationData['userList'] = Sql::$sql1->toArray();
-
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'index';
-  }
-  */
 }

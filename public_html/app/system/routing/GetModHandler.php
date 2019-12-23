@@ -3,7 +3,7 @@ require_once 'Handler.php';
 
 class GetModHandler extends Handler
 {
-  //private $applicationData = [];
+  private $controller;
 
   public function __construct()
   {
@@ -15,27 +15,20 @@ class GetModHandler extends Handler
     switch ($_GET['mod']) {
       case 'logowanie':
         parent::controller('Users');
-        $users = new UsersController();
-        $users->loginView();
+        $this->controller = new UsersController();
+        $this->controller->loginView();
         break;
       case 'rejestracja':
         parent::controller('Users');
-        $users = new UsersController();
-        $users->registerView();
+        $this->controller = new UsersController();
+        $this->controller->registerView();
         break;
-      case 'rejestracja':
-      break;
       case 'stronaGlowna':
-      break;
+        break;
       default:
         header('location: /?mod=stronaGlowna');
         die();
         break;
     }
   }
-  /*
-  public function getApplicationData()
-  {
-    return $this->applicationData;
-  }*/
 }

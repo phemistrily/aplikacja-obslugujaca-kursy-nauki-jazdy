@@ -37,15 +37,30 @@ a {
     transition: 200ms;
 }
 .accountMenu > a:hover {
-    color: #203265;
+    color: #232323;
 }
-
 .appHeader {
     padding: 20px 0px;
     font-size: 30px;
 }
 
 
+#nav {
+    padding: 10px 0px;
+    background-color: #203265;
+    color: #fff;
+}
+
+#main {
+    padding: 20px 0px;
+    min-height: 300px;
+}
+
+#footer {
+    background-color: #232323;
+    color: #fff;
+    padding: 20px 0px;
+}
 
 
 /*-------------------------------------------------------*/

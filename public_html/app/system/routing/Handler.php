@@ -6,7 +6,7 @@ abstract class Handler
      */
     public function controller($controller) 
     {
-        require_once 'app/source/controllers/controller.php';
+        require_once 'app/source/controllers/BaseController.php';
         require_once 'app/source/controllers/'.$controller.'Controller.php';
     }
 }
