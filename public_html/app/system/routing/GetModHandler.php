@@ -1,7 +1,9 @@
 <?php
-class GetModHandler
+require_once 'Handler.php';
+
+class GetModHandler extends Handler
 {
-  private $applicationData = [];
+  //private $applicationData = [];
 
   public function __construct()
   {
@@ -12,6 +14,14 @@ class GetModHandler
   {
     switch ($_GET['mod']) {
       case 'logowanie':
+        parent::controller('Users');
+        $users = new UsersController();
+        $users->loginView();
+        break;
+      case 'rejestracja':
+        parent::controller('Users');
+        $users = new UsersController();
+        $users->registerView();
         break;
       case 'rejestracja':
       break;
@@ -23,8 +33,9 @@ class GetModHandler
         break;
     }
   }
+  /*
   public function getApplicationData()
   {
     return $this->applicationData;
-  }
+  }*/
 }

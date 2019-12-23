@@ -23,7 +23,7 @@ class DisplayHandler
     //
   }
 
-  protected function render($applicationData)
+  protected function render($applicationData, $template)
   {
     if (isset($_SESSION) && !empty($_SESSION))
     {
@@ -43,9 +43,11 @@ class DisplayHandler
     
     
 
-    $this->smarty->assign('applicationData',$applicationData);
+    $this->smarty->assign('applicationData', $applicationData);
     $this->smarty->assign('systemData',$this->systemData);
-    $this->smarty->display('index.html');
+    //var_dump($this->smarty->tpl_vars['systemData']->value);
+    //var_dump($this->smarty->tpl_vars['applicationData']->value);
+    $this->smarty->display($template.'.html');
     if(CONFIG['debug'] == true)
     {
         var_dump($this->smarty->tpl_vars['systemData']->value);

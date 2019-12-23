@@ -6,11 +6,13 @@ require_once 'modules/connector/ConnectionManager.php';
 require_once 'modules/connector/sql.php';
 class ModuleController extends DisplayHandler
 {
-  public $applicationData;
+  public static $applicationData;
+  public static $template;
 
   public function __construct()
   {
     parent::__construct();
+    Sql::connectSql1();
     $this->initialize();
   }
 
@@ -19,13 +21,13 @@ class ModuleController extends DisplayHandler
     if(isset($_GET['mod']))
     {
       $module = new GetModHandler();
-      $this->applicationData = $module->getApplicationData();
+      //$this->applicationData = $module->getApplicationData();
     }
     else if (isset($_POST['form']))
     {
-      $form = new PostFormHandler();
-      $this->applicationData = $form->getApplicationData();
+      $form = new PostFromHandler();
+      //$this->applicationData = $form->getApplicationData();
     }
-    parent::render($this->applicationData);
+    parent::render(self::$applicationData, self::$template);
   }
 }
