@@ -1,9 +1,9 @@
 {include file="header.html"}
 
-{if $systemData.get.mod eq ''}
-
-{elseif $systemData.get.mod eq 'logowanie'}
-  {include file="logowanie.html"}
-{/if}
+  {if $systemData.get.mod eq 'stronaGlowna'}
+    {include file="ekranPowitalny.html"}
+  {elseif $systemData.get.mod eq 'logowanie'}
+    {include file="logowanie.html"}
+  {/if}
 
 {include file="footer.html"}

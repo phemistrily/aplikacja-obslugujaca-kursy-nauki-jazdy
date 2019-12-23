@@ -45,8 +45,6 @@ class DisplayHandler
 
     $this->smarty->assign('applicationData',$applicationData);
     $this->smarty->assign('systemData',$this->systemData);
-    var_dump($this->smarty->tpl_vars['systemData']->value);
-    var_dump($this->smarty->tpl_vars['applicationData']->value);
     $this->smarty->display('index.html');
     if(CONFIG['debug'] == true)
     {

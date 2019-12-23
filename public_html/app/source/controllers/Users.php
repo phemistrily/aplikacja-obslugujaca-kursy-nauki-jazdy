@@ -17,4 +17,15 @@ class Users
     Sql::$sql1->run($query);
     return Sql::$sql1->toArray();
   }
+
+  public function loginUser($email, $password)
+  {
+    $parms = [
+      'email' => $email,
+      'password' => $password
+    ];
+    $query = "SELECT id, email FROM users WHERE email = :email AND password = :password";
+    Sql::$sql1->run($query, $parms);
+    return Sql::$sql1->toArray();
+  }
 }

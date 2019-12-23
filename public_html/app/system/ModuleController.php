@@ -23,7 +23,7 @@ class ModuleController extends DisplayHandler
     }
     else if (isset($_POST['form']))
     {
-      $form = new PostFromHandler();
+      $form = new PostFormHandler();
       $this->applicationData = $form->getApplicationData();
     }
     parent::render($this->applicationData);

@@ -12,13 +12,14 @@ class GetModHandler
   {
     switch ($_GET['mod']) {
       case 'logowanie':
-        include_once('app/source/controllers/Users.php');
-        $users = new Users();
-        $this->applicationData['userList'] = $users->getUsers();
         break;
-      
+      case 'rejestracja':
+      break;
+      case 'stronaGlowna':
+      break;
       default:
-        # code...
+        header('location: /?mod=stronaGlowna');
+        die();
         break;
     }
   }
