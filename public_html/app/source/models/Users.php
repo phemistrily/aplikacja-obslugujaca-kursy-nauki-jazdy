@@ -24,6 +24,22 @@ class Users
         Sql::$sql1->run($query, $parms);
         return Sql::$sql1->toArray();
     }
+
+    public function getInstruktorList()
+    {
+        $query = "SELECT * FROM users WHERE typKonta = 'instruktor'";
+
+        Sql::$sql1->run($query, $parms);
+        return Sql::$sql1->toArray();
+    }
+
+    public function getKursantList()
+    {
+        $query = "SELECT * FROM users WHERE typKonta = 'kursant'";
+
+        Sql::$sql1->run($query);
+        return Sql::$sql1->toArray();
+    }
 }
 
 ?>

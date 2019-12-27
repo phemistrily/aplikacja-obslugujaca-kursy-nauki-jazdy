@@ -45,4 +45,24 @@ class UsersController extends BaseController
   {
 
   }
+
+  public function instruktorzyView(){
+    parent::$applicationData['headTitle'] = 'MORD | Instruktorzy';
+
+    parent::$applicationData['instruktorList'] = $this->users->getInstruktorList();
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'instruktorzy';
+    
+  }
+
+  public function kursanciView(){
+    parent::$applicationData['headTitle'] = 'MORD | Kursanci';
+
+    parent::$applicationData['kursantList'] = $this->users->getKursantList();
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'kursanci';
+    
+  }
 }

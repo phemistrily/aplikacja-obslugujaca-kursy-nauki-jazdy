@@ -1,0 +1,27 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Kursanci</div>
+
+<table class="tab">
+  <tr>
+    <td>Lp.</td>
+    <td>Imię</td>
+    <td>Nazwisko</td>
+    <td>E-mail</td>
+  </tr>
+
+  {foreach $systemData.kursantList as $list}
+    <td>{$list.id}</td>
+    <td>{$list.imie}</td>
+    <td>{$list.nazwisko}</td>
+    <td>{$list.email}</td>
+  {foreachelse}
+    No items were found in the search
+  {/foreach}
+</table>
+
+
+
+{include file="layout/footer.html"}
+

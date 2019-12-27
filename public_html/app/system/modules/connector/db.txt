@@ -1,0 +1,553 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Czas generowania: 27 Gru 2019, 20:13
+-- Wersja serwera: 10.4.8-MariaDB
+-- Wersja PHP: 7.3.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Baza danych: `mord`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `dokument`
+--
+
+CREATE TABLE `dokument` (
+  `idDokument` int(10) UNSIGNED NOT NULL,
+  `typDokumentu` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `egzamin`
+--
+
+CREATE TABLE `egzamin` (
+  `idEgzamin` int(10) UNSIGNED NOT NULL,
+  `data` datetime NOT NULL,
+  `typ` varchar(100) NOT NULL,
+  `wynik` varchar(50) NOT NULL,
+  `idKategoria` int(10) UNSIGNED NOT NULL,
+  `idInstruktor` int(11) UNSIGNED NOT NULL,
+  `idSamochod` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `incydent`
+--
+
+CREATE TABLE `incydent` (
+  `idIncydent` int(10) UNSIGNED NOT NULL,
+  `typIncydentu` varchar(100) NOT NULL,
+  `dataRozpoczeciaIncydentu` date NOT NULL,
+  `dataZakonczeniaIncydentu` date NOT NULL,
+  `idSamochod` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `instruktor`
+--
+
+CREATE TABLE `instruktor` (
+  `idInstruktor` int(10) UNSIGNED NOT NULL,
+  `imie` varchar(20) NOT NULL,
+  `nazwisko` varchar(20) NOT NULL,
+  `dataUrodzenia` date NOT NULL,
+  `pesel` varchar(11) NOT NULL,
+  `adresZamieszkania` varchar(255) NOT NULL,
+  `numerTelefonu` varchar(9) NOT NULL,
+  `adresEmail` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `instruktorkategoriauprawnien`
+--
+
+CREATE TABLE `instruktorkategoriauprawnien` (
+  `idInstrKatUpr` int(10) UNSIGNED NOT NULL,
+  `idInstruktor` int(10) UNSIGNED NOT NULL,
+  `idKategoriaUprawnien` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `instruktorkategoriauprawnien`
+--
+
+INSERT INTO `instruktorkategoriauprawnien` (`idInstrKatUpr`, `idInstruktor`, `idKategoriaUprawnien`) VALUES
+(1, 3, 6),
+(2, 4, 6),
+(3, 4, 8),
+(4, 4, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `jazdaszkoleniowa`
+--
+
+CREATE TABLE `jazdaszkoleniowa` (
+  `idJazdaSzkoleniowa` int(10) UNSIGNED NOT NULL,
+  `data` date NOT NULL,
+  `godzinaRozpoczecia` time NOT NULL,
+  `godzinaZakonczenia` time NOT NULL,
+  `idKursant` int(10) UNSIGNED NOT NULL,
+  `idSamochod` int(10) UNSIGNED NOT NULL,
+  `idInstruktor` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kategoria`
+--
+
+CREATE TABLE `kategoria` (
+  `idKategoria` int(10) UNSIGNED NOT NULL,
+  `nazwa` varchar(20) NOT NULL,
+  `typ` varchar(10) NOT NULL,
+  `opis` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `kategoria`
+--
+
+INSERT INTO `kategoria` (`idKategoria`, `nazwa`, `typ`, `opis`) VALUES
+(1, 'AM', '', ''),
+(2, 'A1', '', ''),
+(3, 'A2', '', ''),
+(4, 'A', '', ''),
+(5, 'B1', '', ''),
+(6, 'B', '', ''),
+(7, 'B+E', '', ''),
+(8, 'C', '', ''),
+(9, 'C1', '', ''),
+(10, 'C1+E', '', ''),
+(11, 'C+E', '', ''),
+(12, 'D', '', ''),
+(13, 'D1', '', ''),
+(14, 'D1+E', '', ''),
+(15, 'D+E', '', ''),
+(16, 'T', '', ''),
+(17, 'Tramwaj', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kategoriauprawnien`
+--
+
+CREATE TABLE `kategoriauprawnien` (
+  `idKategoriaUprawnien` int(10) UNSIGNED NOT NULL,
+  `nazwa` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `kategoriauprawnien`
+--
+
+INSERT INTO `kategoriauprawnien` (`idKategoriaUprawnien`, `nazwa`) VALUES
+(1, 'AM'),
+(2, 'A1'),
+(3, 'A2'),
+(4, 'A'),
+(5, 'B1'),
+(6, 'B'),
+(7, 'B+E'),
+(8, 'C'),
+(9, 'C1'),
+(10, 'C1+E'),
+(11, 'C+E'),
+(12, 'D'),
+(13, 'D1'),
+(14, 'D1+E'),
+(15, 'D+E'),
+(16, 'T'),
+(17, 'Tramwaj');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kursant`
+--
+
+CREATE TABLE `kursant` (
+  `idKursant` int(10) UNSIGNED NOT NULL,
+  `ime` varchar(20) NOT NULL,
+  `nazwisko` varchar(20) NOT NULL,
+  `dataUrodzenia` date NOT NULL,
+  `pesel` varchar(11) NOT NULL,
+  `adresZamieszkania` varchar(255) NOT NULL,
+  `numerTelefonu` varchar(9) NOT NULL,
+  `adresEmail` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kursantegzamin`
+--
+
+CREATE TABLE `kursantegzamin` (
+  `idKursantEgzamin` int(10) UNSIGNED NOT NULL,
+  `idKursant` int(10) UNSIGNED NOT NULL,
+  `idEgzamin` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kursantkursprawajazdy`
+--
+
+CREATE TABLE `kursantkursprawajazdy` (
+  `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL,
+  `idKursant` int(10) UNSIGNED NOT NULL,
+  `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kursprawajazdy`
+--
+
+CREATE TABLE `kursprawajazdy` (
+  `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL,
+  `idKategoria` int(10) UNSIGNED NOT NULL,
+  `dataRozpoczecia` date NOT NULL,
+  `dataZakonczenia` date NOT NULL,
+  `idInstruktor` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `licencjaegzaminator`
+--
+
+CREATE TABLE `licencjaegzaminator` (
+  `idLicencjaEgzaminator` int(10) UNSIGNED NOT NULL,
+  `numerLicencji` varchar(20) NOT NULL,
+  `dataWystawienia` date NOT NULL,
+  `dataWaznosci` date NOT NULL,
+  `organWydania` varchar(255) NOT NULL,
+  `idInstruktor` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `licencjaegzaminator`
+--
+
+INSERT INTO `licencjaegzaminator` (`idLicencjaEgzaminator`, `numerLicencji`, `dataWystawienia`, `dataWaznosci`, `organWydania`, `idInstruktor`) VALUES
+(1, '01/15102019', '2019-10-15', '2020-06-30', 'mord', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `licencjaegzaminatorkategoriauprawnien`
+--
+
+CREATE TABLE `licencjaegzaminatorkategoriauprawnien` (
+  `idLicEgzKatUpr` int(10) UNSIGNED NOT NULL,
+  `idLicencjaEgzaminator` int(10) UNSIGNED NOT NULL,
+  `idKategoriaUprawnien` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `licencjaegzaminatorkategoriauprawnien`
+--
+
+INSERT INTO `licencjaegzaminatorkategoriauprawnien` (`idLicEgzKatUpr`, `idLicencjaEgzaminator`, `idKategoriaUprawnien`) VALUES
+(1, 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `platnosc`
+--
+
+CREATE TABLE `platnosc` (
+  `idPlatnosc` int(10) UNSIGNED NOT NULL,
+  `kwota` varchar(10) NOT NULL,
+  `dataWplaty` date NOT NULL,
+  `terminPlatnosci` date NOT NULL,
+  `raty` varchar(10) DEFAULT NULL,
+  `idKursPrawaJazdy` int(11) DEFAULT NULL,
+  `idEgzamin` int(11) DEFAULT NULL,
+  `idJazdaSzkoleniowa` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `samochod`
+--
+
+CREATE TABLE `samochod` (
+  `idSamochod` int(10) UNSIGNED NOT NULL,
+  `marka` varchar(50) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  `rokProdukcji` year(4) NOT NULL,
+  `numerRejestracyjny` varchar(10) NOT NULL,
+  `vin` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `imie` varchar(20) NOT NULL,
+  `nazwisko` varchar(20) NOT NULL,
+  `dataUrodzenia` date NOT NULL,
+  `pesel` varchar(11) NOT NULL,
+  `adresZamieszkania` varchar(255) NOT NULL,
+  `numerTelefonu` varchar(9) NOT NULL,
+  `typKonta` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `imie`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `typKonta`) VALUES
+(1, 'admin@mord.pl', '', '', '', '0000-00-00', '', '', '', 'admin'),
+(2, 'janlis@mord.pl', '', 'jan', 'lis', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
+(3, 'kowalski@mord.pl', '', 'jan', 'kowalski', '1980-08-15', '80081510203', 'kraków', '100200301', 'instruktor'),
+(4, 'jangil@mord.pl', '', 'jan', 'gil', '1975-09-02', '75090210203', 'nowy sącz', '100200302', 'instruktor');
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indeksy dla tabeli `dokument`
+--
+ALTER TABLE `dokument`
+  ADD PRIMARY KEY (`idDokument`);
+
+--
+-- Indeksy dla tabeli `egzamin`
+--
+ALTER TABLE `egzamin`
+  ADD PRIMARY KEY (`idEgzamin`);
+
+--
+-- Indeksy dla tabeli `incydent`
+--
+ALTER TABLE `incydent`
+  ADD PRIMARY KEY (`idIncydent`);
+
+--
+-- Indeksy dla tabeli `instruktor`
+--
+ALTER TABLE `instruktor`
+  ADD PRIMARY KEY (`idInstruktor`);
+
+--
+-- Indeksy dla tabeli `instruktorkategoriauprawnien`
+--
+ALTER TABLE `instruktorkategoriauprawnien`
+  ADD PRIMARY KEY (`idInstrKatUpr`);
+
+--
+-- Indeksy dla tabeli `jazdaszkoleniowa`
+--
+ALTER TABLE `jazdaszkoleniowa`
+  ADD PRIMARY KEY (`idJazdaSzkoleniowa`);
+
+--
+-- Indeksy dla tabeli `kategoria`
+--
+ALTER TABLE `kategoria`
+  ADD PRIMARY KEY (`idKategoria`);
+
+--
+-- Indeksy dla tabeli `kategoriauprawnien`
+--
+ALTER TABLE `kategoriauprawnien`
+  ADD PRIMARY KEY (`idKategoriaUprawnien`);
+
+--
+-- Indeksy dla tabeli `kursant`
+--
+ALTER TABLE `kursant`
+  ADD PRIMARY KEY (`idKursant`);
+
+--
+-- Indeksy dla tabeli `kursantegzamin`
+--
+ALTER TABLE `kursantegzamin`
+  ADD PRIMARY KEY (`idKursantEgzamin`);
+
+--
+-- Indeksy dla tabeli `kursantkursprawajazdy`
+--
+ALTER TABLE `kursantkursprawajazdy`
+  ADD PRIMARY KEY (`idKursantKursPrawaJazdy`);
+
+--
+-- Indeksy dla tabeli `kursprawajazdy`
+--
+ALTER TABLE `kursprawajazdy`
+  ADD PRIMARY KEY (`idKursPrawaJazdy`);
+
+--
+-- Indeksy dla tabeli `licencjaegzaminator`
+--
+ALTER TABLE `licencjaegzaminator`
+  ADD PRIMARY KEY (`idLicencjaEgzaminator`);
+
+--
+-- Indeksy dla tabeli `licencjaegzaminatorkategoriauprawnien`
+--
+ALTER TABLE `licencjaegzaminatorkategoriauprawnien`
+  ADD PRIMARY KEY (`idLicEgzKatUpr`);
+
+--
+-- Indeksy dla tabeli `platnosc`
+--
+ALTER TABLE `platnosc`
+  ADD PRIMARY KEY (`idPlatnosc`);
+
+--
+-- Indeksy dla tabeli `samochod`
+--
+ALTER TABLE `samochod`
+  ADD PRIMARY KEY (`idSamochod`);
+
+--
+-- Indeksy dla tabeli `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `dokument`
+--
+ALTER TABLE `dokument`
+  MODIFY `idDokument` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `egzamin`
+--
+ALTER TABLE `egzamin`
+  MODIFY `idEgzamin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `incydent`
+--
+ALTER TABLE `incydent`
+  MODIFY `idIncydent` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `instruktor`
+--
+ALTER TABLE `instruktor`
+  MODIFY `idInstruktor` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `instruktorkategoriauprawnien`
+--
+ALTER TABLE `instruktorkategoriauprawnien`
+  MODIFY `idInstrKatUpr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT dla tabeli `jazdaszkoleniowa`
+--
+ALTER TABLE `jazdaszkoleniowa`
+  MODIFY `idJazdaSzkoleniowa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `kategoria`
+--
+ALTER TABLE `kategoria`
+  MODIFY `idKategoria` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT dla tabeli `kategoriauprawnien`
+--
+ALTER TABLE `kategoriauprawnien`
+  MODIFY `idKategoriaUprawnien` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT dla tabeli `kursant`
+--
+ALTER TABLE `kursant`
+  MODIFY `idKursant` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `kursantegzamin`
+--
+ALTER TABLE `kursantegzamin`
+  MODIFY `idKursantEgzamin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `kursantkursprawajazdy`
+--
+ALTER TABLE `kursantkursprawajazdy`
+  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `kursprawajazdy`
+--
+ALTER TABLE `kursprawajazdy`
+  MODIFY `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `licencjaegzaminator`
+--
+ALTER TABLE `licencjaegzaminator`
+  MODIFY `idLicencjaEgzaminator` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `licencjaegzaminatorkategoriauprawnien`
+--
+ALTER TABLE `licencjaegzaminatorkategoriauprawnien`
+  MODIFY `idLicEgzKatUpr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `platnosc`
+--
+ALTER TABLE `platnosc`
+  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `samochod`
+--
+ALTER TABLE `samochod`
+  MODIFY `idSamochod` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
