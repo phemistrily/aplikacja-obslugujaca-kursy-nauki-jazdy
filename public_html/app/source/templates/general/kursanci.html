@@ -4,21 +4,28 @@
 <div class="headline">Kursanci</div>
 
 <table class="tab">
-  <tr>
-    <td>Lp.</td>
-    <td>Imię</td>
-    <td>Nazwisko</td>
-    <td>E-mail</td>
-  </tr>
-
-  {foreach $applicationData.kursantList as $row}
-  <tr>
-    <td>{$row.id}</td>
-    <td>{$row.imie}</td>
-    <td>{$row.nazwisko}</td>
-    <td>{$row.email}</td>
-  </tr>
-  {/foreach}
+  <tr class="rowTitle">
+      <td>Lp.</td>
+      <td>Imię</td>
+      <td>Nazwisko</td>
+      <td>Data urodzenia</td>
+      <td>Pesel</td>
+      <td>Adres zamieszkania</td>
+      <td>Numer telefonu</td>
+      <td>E-mail</td>
+    </tr>
+    {foreach $applicationData.kursantList as $row}
+    <tr>
+      <td></td>
+      <td>{$row.imie}</td>
+      <td>{$row.nazwisko}</td>
+      <td>{$row.dataUrodzenia}</td>
+      <td>{$row.pesel}</td>
+      <td>{$row.adresZamieszkania}</td>
+      <td>{$row.numerTelefonu}</td>
+      <td>{$row.email}</td>
+    </tr>
+    {/foreach}
 </table>
 
 

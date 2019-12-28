@@ -4,17 +4,25 @@
 <div class="headline">Instruktorzy</div>
 
 <table class="tab">
-  <tr>
+  <tr class="rowTitle">
     <td>Lp.</td>
     <td>Imię</td>
     <td>Nazwisko</td>
+    <td>Data urodzenia</td>
+    <td>Pesel</td>
+    <td>Adres zamieszkania</td>
+    <td>Numer telefonu</td>
     <td>E-mail</td>
   </tr>
   {foreach $applicationData.instruktorList as $row}
   <tr>
-    <td>{$row.id}</td>
+    <td></td>
     <td>{$row.imie}</td>
     <td>{$row.nazwisko}</td>
+    <td>{$row.dataUrodzenia}</td>
+    <td>{$row.pesel}</td>
+    <td>{$row.adresZamieszkania}</td>
+    <td>{$row.numerTelefonu}</td>
     <td>{$row.email}</td>
   </tr>
   {/foreach}

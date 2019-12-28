@@ -23,6 +23,7 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->registerView();
         break;
+
       case 'kursy':
         parent::controller('Kursy');
         $this->controller = new KursyController();
@@ -33,6 +34,7 @@ class GetModHandler extends Handler
         $this->controller = new EgzaminyController();
         $this->controller->egzaminyView();
         break;
+        
       case 'kursanci':
         parent::controller('Users');
         $this->controller = new UsersController();

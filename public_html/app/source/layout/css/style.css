@@ -1,7 +1,9 @@
 body, div, span, img, ul, ol, li, a, p, hr, form, input, select, textarea, header, button, nav, main, footer {
 	margin: 0px; padding: 0px; border: 0px; text-decoration: none; list-style-type: none;
 }
-
+table {
+    border-collapse: collapse;
+}
 body {
 	font-family: 'Open Sans';
     font-size: 14px; 
@@ -73,7 +75,6 @@ a {
 }
 
 
-
 .navMenu > li {
     display: inline-block;
     margin: 0px 5px;
@@ -87,6 +88,29 @@ a {
 .navMenu > li > a:hover {
     color: #A9E051;
 }
+/*-------------------------------------------------------*/
+
+
+.tab {
+    width: 100%;
+    text-align: center;
+}
+.tab tr {
+    height: 40px;
+}
+
+.tab tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+.tab .rowTitle {
+    font-weight: 500;
+    
+}
+
+
+
+
+
 
 
 
@@ -118,7 +142,7 @@ input {
     border: 1px solid #ccc;
 }
 
-button {
+button.green-btn{
     padding: 7px;
     background-color: #86b140;
     color: #fff;
@@ -127,7 +151,22 @@ button {
     font-weight: 500;
     transition: 200ms;
 }
-button:hover {
+button.green-btn:hover {
+    color: #232323;
+}
+
+
+
+button.green-btn-min {
+    padding: 5px 15px;
+    background-color: #86b140;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 200ms;
+}
+button.green-btn-min:hover {
     color: #232323;
 }
 /*-------------------------------------------------------*/
