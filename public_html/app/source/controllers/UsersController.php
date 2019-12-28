@@ -53,7 +53,6 @@ class UsersController extends BaseController
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'instruktorzy';
-    
   }
 
   public function kursanciView(){
@@ -63,6 +62,5 @@ class UsersController extends BaseController
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'kursanci';
-    
   }
 }

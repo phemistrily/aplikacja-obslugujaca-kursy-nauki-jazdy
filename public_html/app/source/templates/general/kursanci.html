@@ -11,13 +11,13 @@
     <td>E-mail</td>
   </tr>
 
-  {foreach $systemData.kursantList as $list}
-    <td>{$list.id}</td>
-    <td>{$list.imie}</td>
-    <td>{$list.nazwisko}</td>
-    <td>{$list.email}</td>
-  {foreachelse}
-    No items were found in the search
+  {foreach $applicationData.kursantList as $row}
+  <tr>
+    <td>{$row.id}</td>
+    <td>{$row.imie}</td>
+    <td>{$row.nazwisko}</td>
+    <td>{$row.email}</td>
+  </tr>
   {/foreach}
 </table>
 

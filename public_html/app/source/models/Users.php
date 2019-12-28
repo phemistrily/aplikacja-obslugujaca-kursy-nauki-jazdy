@@ -20,6 +20,7 @@ class Users
         'email' => $email,
         'password' => $password
         ];
+        //$query = "INSERT INTO users(email, password) VALUES (:email, :password)";
         $query = "SELECT id, email FROM users WHERE email = :email AND password = :password";
         Sql::$sql1->run($query, $parms);
         return Sql::$sql1->toArray();
@@ -29,7 +30,7 @@ class Users
     {
         $query = "SELECT * FROM users WHERE typKonta = 'instruktor'";
 
-        Sql::$sql1->run($query, $parms);
+        Sql::$sql1->run($query);
         return Sql::$sql1->toArray();
     }
 
