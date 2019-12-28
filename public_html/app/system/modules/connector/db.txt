@@ -1,16 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 27 Gru 2019, 20:13
--- Wersja serwera: 10.4.8-MariaDB
--- Wersja PHP: 7.3.10
+-- Czas generowania: 28 Gru 2019, 16:54
+-- Wersja serwera: 10.4.10-MariaDB
+-- Wersja PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Baza danych: `mord`
@@ -43,6 +49,14 @@ CREATE TABLE `egzamin` (
   `idSamochod` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Zrzut danych tabeli `egzamin`
+--
+
+INSERT INTO `egzamin` (`idEgzamin`, `data`, `typ`, `wynik`, `idKategoria`, `idInstruktor`, `idSamochod`) VALUES
+(1, '2019-12-17 00:00:00', 'B', 'pozytywny', 6, 2, 1),
+(2, '2019-12-10 00:00:00', 'kategoria a', 'negatywny', 4, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +70,13 @@ CREATE TABLE `incydent` (
   `dataZakonczeniaIncydentu` date NOT NULL,
   `idSamochod` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `incydent`
+--
+
+INSERT INTO `incydent` (`idIncydent`, `typIncydentu`, `dataRozpoczeciaIncydentu`, `dataZakonczeniaIncydentu`, `idSamochod`) VALUES
+(1, 'stłuczka', '2019-12-30', '2019-12-30', 2);
 
 -- --------------------------------------------------------
 
@@ -73,6 +94,16 @@ CREATE TABLE `instruktor` (
   `numerTelefonu` varchar(9) NOT NULL,
   `adresEmail` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `instruktor`
+--
+
+INSERT INTO `instruktor` (`idInstruktor`, `imie`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `adresEmail`) VALUES
+(1, 'Jan', 'Kowalski', '1991-11-11', '97011508933', 'Limanowa', '4475062', 'janek@onet.pl'),
+(2, 'Tomasz', 'Nowak', '1997-05-05', '97050509876', 'Rupniów 231', '737193231', 'tomek.n@onet.pl'),
+(3, 'Michał', 'Otrek', '1991-05-05', '97050502876', 'Łapanów 231', '510193231', 'michal.o@onet.pl'),
+(4, 'Józef', 'Cieślak', '1966-12-10', '66121013525', 'Kraków 32', '184422324', 'jozik.c@onet.pl');
 
 -- --------------------------------------------------------
 
@@ -199,6 +230,15 @@ CREATE TABLE `kursant` (
   `adresEmail` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Zrzut danych tabeli `kursant`
+--
+
+INSERT INTO `kursant` (`idKursant`, `ime`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `adresEmail`) VALUES
+(1, 'Michał', 'Ptak', '1997-11-11', '97111109876', 'Limanowa 23', '722999232', 'michal.ptak@onet.pl'),
+(2, 'Jan', 'Ptak', '1996-11-11', '96111109876', 'Limanowa 113', '722999212', 'Jan.ptak@onet.pl'),
+(3, 'Kinga', 'Kot', '1999-07-27', '99111109876', 'Sowliny 23', '722999232', 'kinga.kot@onet.pl');
+
 -- --------------------------------------------------------
 
 --
@@ -210,6 +250,14 @@ CREATE TABLE `kursantegzamin` (
   `idKursant` int(10) UNSIGNED NOT NULL,
   `idEgzamin` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `kursantegzamin`
+--
+
+INSERT INTO `kursantegzamin` (`idKursantEgzamin`, `idKursant`, `idEgzamin`) VALUES
+(1, 1, 1),
+(2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -257,7 +305,9 @@ CREATE TABLE `licencjaegzaminator` (
 --
 
 INSERT INTO `licencjaegzaminator` (`idLicencjaEgzaminator`, `numerLicencji`, `dataWystawienia`, `dataWaznosci`, `organWydania`, `idInstruktor`) VALUES
-(1, '01/15102019', '2019-10-15', '2020-06-30', 'mord', 4);
+(1, '01/15102019', '2019-10-15', '2020-06-30', 'mord', 4),
+(2, '02/31122019', '2019-12-31', '2021-12-31', 'mord', 3),
+(3, '03/22122019', '2019-12-22', '2023-12-22', 'mord', 2);
 
 -- --------------------------------------------------------
 
@@ -310,6 +360,16 @@ CREATE TABLE `samochod` (
   `vin` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Zrzut danych tabeli `samochod`
+--
+
+INSERT INTO `samochod` (`idSamochod`, `marka`, `model`, `rokProdukcji`, `numerRejestracyjny`, `vin`) VALUES
+(1, 'Opel', 'Astra', 2007, 'KNS0023', '123321'),
+(2, 'Suzuki', 'Baleno', 2013, 'KNS00267', '13333321'),
+(3, 'Fiat', 'Punto', 2009, '123333', '242424242'),
+(4, 'Hyundai', 'i30', 2013, 'Sz323', '97011509832');
+
 -- --------------------------------------------------------
 
 --
@@ -335,9 +395,15 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `imie`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `typKonta`) VALUES
 (1, 'admin@mord.pl', '', '', '', '0000-00-00', '', '', '', 'admin'),
-(2, 'janlis@mord.pl', '', 'jan', 'lis', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
-(3, 'kowalski@mord.pl', '', 'jan', 'kowalski', '1980-08-15', '80081510203', 'kraków', '100200301', 'instruktor'),
-(4, 'jangil@mord.pl', '', 'jan', 'gil', '1975-09-02', '75090210203', 'nowy sącz', '100200302', 'instruktor');
+(2, 'adam.kot@mord.pl', 'adam123', 'Adam', 'Kot', '1890-11-11', '90111123235', 'Rupniów 321', '510044235', 'Instruktor'),
+(3, 'kowalski@mord.pl', '', 'Jan', 'Kowalski', '1980-08-15', '80081510203', 'kraków', '100200301', 'instruktor'),
+(4, 'jangil@mord.pl', '', 'Jan', 'Gil', '1975-09-02', '75090210203', 'nowy sącz', '100200302', 'instruktor'),
+(5, 'janlis@mord.pl', '', 'Jan', 'Lis', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
+(6, 'przemek.kot@mord.pl', 'przemek231', 'Przemysław', 'Kotarski', '1990-11-11', '90111123235', 'Rupniów 321', '510044235', 'kursant'),
+(7, 'elizeusz.pal@mord.pl', 'elizeusz321', 'Elizeusz', 'Paliwęgiel', '1958-02-14', '58021423235', 'Kaszaloty 13b', '510044235', 'kursant'),
+(8, 'natalia.k@mord.pl', 'kocia231', 'Natalia', 'Krzyk', '1980-03-08', '80030823115', 'Kocie Norki 18', '183375231', 'kursant'),
+(9, 'pawel.w@mord.pl', 'pawelekhot', 'Paweł', 'Waligórski', '1979-09-10', '79091023115', 'Albatrosy 15', '183375231', 'kursant'),
+(56, 'roman.d@interia.pl', '', 'Roman', 'Derey', '1973-12-17', '73121712345', 'Bełdno 32', '183375231', 'kursant');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -395,13 +461,16 @@ ALTER TABLE `kategoriauprawnien`
 -- Indeksy dla tabeli `kursant`
 --
 ALTER TABLE `kursant`
-  ADD PRIMARY KEY (`idKursant`);
+  ADD PRIMARY KEY (`idKursant`),
+  ADD KEY `idKursant` (`idKursant`);
 
 --
 -- Indeksy dla tabeli `kursantegzamin`
 --
 ALTER TABLE `kursantegzamin`
-  ADD PRIMARY KEY (`idKursantEgzamin`);
+  ADD PRIMARY KEY (`idKursantEgzamin`),
+  ADD KEY `idKursant_2` (`idKursant`),
+  ADD KEY `idKursant` (`idKursant`);
 
 --
 -- Indeksy dla tabeli `kursantkursprawajazdy`
@@ -446,7 +515,7 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla tabel zrzutów
 --
 
 --
@@ -459,19 +528,19 @@ ALTER TABLE `dokument`
 -- AUTO_INCREMENT dla tabeli `egzamin`
 --
 ALTER TABLE `egzamin`
-  MODIFY `idEgzamin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idEgzamin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `incydent`
 --
 ALTER TABLE `incydent`
-  MODIFY `idIncydent` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idIncydent` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `instruktor`
 --
 ALTER TABLE `instruktor`
-  MODIFY `idInstruktor` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idInstruktor` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `instruktorkategoriauprawnien`
@@ -501,13 +570,13 @@ ALTER TABLE `kategoriauprawnien`
 -- AUTO_INCREMENT dla tabeli `kursant`
 --
 ALTER TABLE `kursant`
-  MODIFY `idKursant` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idKursant` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `kursantegzamin`
 --
 ALTER TABLE `kursantegzamin`
-  MODIFY `idKursantEgzamin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idKursantEgzamin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `kursantkursprawajazdy`
@@ -525,7 +594,7 @@ ALTER TABLE `kursprawajazdy`
 -- AUTO_INCREMENT dla tabeli `licencjaegzaminator`
 --
 ALTER TABLE `licencjaegzaminator`
-  MODIFY `idLicencjaEgzaminator` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idLicencjaEgzaminator` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `licencjaegzaminatorkategoriauprawnien`
@@ -543,11 +612,15 @@ ALTER TABLE `platnosc`
 -- AUTO_INCREMENT dla tabeli `samochod`
 --
 ALTER TABLE `samochod`
-  MODIFY `idSamochod` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idSamochod` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
