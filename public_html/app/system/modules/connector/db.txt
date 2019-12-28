@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 28 Gru 2019, 16:54
+-- Czas generowania: 28 Gru 2019, 17:33
 -- Wersja serwera: 10.4.10-MariaDB
 -- Wersja PHP: 7.3.12
 
@@ -94,16 +94,6 @@ CREATE TABLE `instruktor` (
   `numerTelefonu` varchar(9) NOT NULL,
   `adresEmail` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `instruktor`
---
-
-INSERT INTO `instruktor` (`idInstruktor`, `imie`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `adresEmail`) VALUES
-(1, 'Jan', 'Kowalski', '1991-11-11', '97011508933', 'Limanowa', '4475062', 'janek@onet.pl'),
-(2, 'Tomasz', 'Nowak', '1997-05-05', '97050509876', 'Rupniów 231', '737193231', 'tomek.n@onet.pl'),
-(3, 'Michał', 'Otrek', '1991-05-05', '97050502876', 'Łapanów 231', '510193231', 'michal.o@onet.pl'),
-(4, 'Józef', 'Cieślak', '1966-12-10', '66121013525', 'Kraków 32', '184422324', 'jozik.c@onet.pl');
 
 -- --------------------------------------------------------
 
@@ -229,15 +219,6 @@ CREATE TABLE `kursant` (
   `numerTelefonu` varchar(9) NOT NULL,
   `adresEmail` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `kursant`
---
-
-INSERT INTO `kursant` (`idKursant`, `ime`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `adresEmail`) VALUES
-(1, 'Michał', 'Ptak', '1997-11-11', '97111109876', 'Limanowa 23', '722999232', 'michal.ptak@onet.pl'),
-(2, 'Jan', 'Ptak', '1996-11-11', '96111109876', 'Limanowa 113', '722999212', 'Jan.ptak@onet.pl'),
-(3, 'Kinga', 'Kot', '1999-07-27', '99111109876', 'Sowliny 23', '722999232', 'kinga.kot@onet.pl');
 
 -- --------------------------------------------------------
 
