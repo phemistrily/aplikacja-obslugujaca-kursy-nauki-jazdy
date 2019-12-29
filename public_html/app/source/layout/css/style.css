@@ -30,7 +30,8 @@ a {
     line-height: 40px;
     text-align: right;
 }
-.accountMenu > a {
+.accountMenu > a,
+.accountMenu > span {
     display: inline-block;
     padding: 0px 10px;
     color: #fff;

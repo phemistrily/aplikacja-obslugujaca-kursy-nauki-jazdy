@@ -30,16 +30,26 @@ class UsersController extends BaseController
 
   public function loginUser($post)
   {
-    $user = $this->users->loginUser($post['email'], $post['password']);
+    $user = $this->users->loginUser($post);
     if($user)
     {
       $_SESSION['userId'] = $user[0]['id'];
+      $_SESSION['userName'] = ucfirst($user[0]['imie']).' '.ucfirst($user[0]['nazwisko']);
+      $_SESSION['typKonta'] = $user[0]['typKonta'];
       parent::redirect('/?mod=dashboard&msg=s_loggedIn');
     }
     else
     {
       parent::redirect('/?mod=logowanie&msg=w_errLogin');
     }
+  }
+
+  public function logout()
+  {
+    unset($_SESSION['userId']);
+    unset($_SESSION['userName']);
+    unset($_SESSION['typKonta']);
+    parent::redirect('/');
   }
 
   public function registerUser($post)

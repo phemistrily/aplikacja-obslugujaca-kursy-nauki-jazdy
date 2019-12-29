@@ -14,21 +14,20 @@ class Users
         return Sql::$sql1->toArray();
     }
 
-    public function loginUser($email, $password)
+    public function loginUser($loginData)
     {
         $parms = [
-        'email' => $email,
-        'password' => sha1($password)
+        'email' => $loginData['email'],
+        'password' => sha1($loginData['password'])
         ];
-        //$query = "INSERT INTO users(email, password) VALUES (:email, :password)";
-        $query = "SELECT id, email FROM users WHERE email = :email AND password = :password";
+        $query = "SELECT id, email, imie, nazwisko, typKonta FROM users WHERE email = :email AND password = :password";
         Sql::$sql1->run($query, $parms);
         return Sql::$sql1->toArray();
     }
 
     public function registerUser($userData)
     {
-        $login = $userData['login'];
+        $login = $userData['email'];
         $password = sha1($userData['password']);
         $imie = $userData['imie'];
         $nazwisko = $userData['nazwisko'];

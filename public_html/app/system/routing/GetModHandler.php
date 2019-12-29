@@ -23,6 +23,11 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->registerView();
         break;
+      case 'wyloguj':
+        parent::controller('Users');
+        $this->controller = new UsersController();
+        $this->controller->logout();
+        break;
 
       case 'kursy':
         parent::controller('Kursy');

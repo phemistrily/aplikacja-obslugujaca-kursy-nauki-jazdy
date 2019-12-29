@@ -14,7 +14,7 @@
       <button name="form" value="login" type="submit" class="green-btn">Zaloguj</button>
     </div>
   </form>
-  {if $systemData.get.msg eq 'w_errLogin'}
+  {if $systemData.get.msg == 'w_errLogin'}
   <div class="formDiv">
     <div class="formErr">
         Niepoprawny login lub hasło
