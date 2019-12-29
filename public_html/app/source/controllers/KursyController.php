@@ -31,10 +31,10 @@ class KursyController extends BaseController
   }
 
 
-  public function zapiszNaKurs(){
+  public function zapiszNaKurs($post){
     
     if(isset($_SESSION['userId'])) {
-      $result = $this->kursy->zapiszNaKurs($_POST);
+      $result = $this->kursy->zapiszNaKurs($post);
       if($result){
         parent::redirect('/?mod=mojekursy&msg=w_zapisanoNaKurs');
       } else {
@@ -46,12 +46,10 @@ class KursyController extends BaseController
     }
   }
 
-  public function rezygnujKurs(){
+  public function rezygnujKurs($post){
     
-    if(isset($_SESSION['userId'])) {
-      $this->kursy->rezygnujKurs($_POST);
-      parent::redirect('/?mod=mojekursy&msg=w_rezygnacjaKurs');
-    }
+    $this->kursy->rezygnujKurs($post);
+    parent::redirect('/?mod=mojekursy&msg=w_rezygnacjaKurs');
   }
 
   

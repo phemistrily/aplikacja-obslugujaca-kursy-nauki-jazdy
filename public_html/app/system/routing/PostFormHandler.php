@@ -44,6 +44,12 @@ class PostFormHandler extends Handler
         $this->controller->rezygnujKurs($_POST);
         die();
         break;
+      case 'wlaczRaty':
+        parent::controller('Platnosci');
+        $this->controller = new PlatnosciController();
+        $this->controller->wlaczRaty($_POST);
+        die();
+        break;
         
       default:
         # code...

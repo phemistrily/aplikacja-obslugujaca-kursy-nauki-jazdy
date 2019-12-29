@@ -1,0 +1,50 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Moje raty</div>
+
+
+{if !empty($applicationData.mojeRatyList)}
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Kwota</td>
+    <td>Termin płatności</td>
+    <td>Status płatności</td>
+    <td>Data wpłaty</td>
+    <td></td>
+  </tr>
+  {foreach $applicationData.mojeRatyList as $row}
+  <tr>
+    <td></td>
+    <td>{$row.kwota} zł</td>
+    <td>{$row.terminPlatnosci}</td>
+
+    {if $row.dataWplaty != NULL}
+      <td>opłacone</td>
+      <td>{$row.dataWplaty}</td>
+    {else}
+      <td>nieopłacone</td>
+      <td>-</td>
+    {/if}
+
+    {if $row.dataWplaty != NULL}
+      <td></td>
+    {else}
+      <td>
+        <form action="/" method="POST">
+          <input type="hidden" name="idRaty" value="{$row.idRaty}">
+          <button name="form" value="oplacRate" type="submit" class="green-btn-min">Opłać</button>
+        </form>
+      </td>
+    {/if}
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Brak rat
+{/if}
+
+
+{include file="layout/footer.html"}
+

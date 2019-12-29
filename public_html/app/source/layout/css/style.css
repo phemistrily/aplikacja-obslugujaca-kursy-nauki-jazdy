@@ -174,7 +174,8 @@ button.green-btn:hover {
 
 
 
-button.green-btn-min {
+button.green-btn-min,
+a.green-btn-min {
     padding: 5px 7px;
     background-color: #86b140;
     color: #fff;
@@ -183,7 +184,8 @@ button.green-btn-min {
     font-weight: 500;
     transition: 200ms;
 }
-button.green-btn-min:hover {
+button.green-btn-min:hover,
+a.green-btn-min:hover {
     color: #232323;
 }
 /*-------------------------------------------------------*/
