@@ -3,6 +3,11 @@
 
 <div class="headline">Zaloguj się do systemu</div>
 <div class="formArea">
+  {if $systemData.get.msg == 'w_zapiszNaKurs'}
+  <div class="divArea">
+      Aby zapisać się na kurs musisz się zalogować
+  </div>
+  {/if}
   <form action="/" method="POST">
     <div class="formDiv">
       <input type="text" name="email" placeholder="E-mail" />
@@ -21,7 +26,13 @@
     </div>
   </div>
   {/if}
+
+  <div class="divArea">
+    <a href="/?mod=rejestracja" class="link">Jeśli nie masz konta zarejestruj się &raquo</a>
+  </div>
 </div>
+
+
 
 
 

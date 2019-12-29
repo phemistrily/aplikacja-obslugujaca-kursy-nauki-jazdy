@@ -1,19 +1,19 @@
 <?php
 class EgzaminyController extends BaseController
 {
-  private $users;
+  private $egzaminy;
 
   public function __construct()
   {
     parent::model('Egzaminy');
-    $this->users = new Egzaminy();
+    $this->egzaminy = new Egzaminy();
   }
 
 
   public function egzaminyView(){
     parent::$applicationData['headTitle'] = 'MORD | Egzaminy';
 
-    parent::$applicationData['egzaminyList'] = $this->users->getEgzaminyList();
+    parent::$applicationData['egzaminyList'] = $this->egzaminy->getEgzaminyList();
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'egzaminy';
