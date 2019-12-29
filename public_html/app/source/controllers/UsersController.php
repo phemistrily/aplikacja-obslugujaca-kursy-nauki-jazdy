@@ -33,6 +33,7 @@ class UsersController extends BaseController
     $user = $this->users->loginUser($post['email'], $post['password']);
     if($user)
     {
+      $_SESSION['userId'] = $user[0]['id'];
       parent::redirect('/?mod=dashboard&msg=s_loggedIn');
     }
     else
@@ -41,9 +42,17 @@ class UsersController extends BaseController
     }
   }
 
-  public function registerUser()
+  public function registerUser($post)
   {
-
+    $user = $this->users->registerUser($post);
+    if($user)
+    {
+      parent::redirect('/?mod=logowanie&msg=s_register');
+    }
+    else
+    {
+      parent::redirect('/?mod=rejestracja&msg=w_userExist');
+    }
   }
 
   public function instruktorzyView(){

@@ -56,15 +56,8 @@ class SqlConnector// implements ConnectionInterface
 
   public function getRow()
   {
-    if(empty($this->response))
-    {
       $response = $this->response->fetch(PDO::FETCH_ASSOC);
       return $response;
-    }
-    else
-    {
-      return $this->response;
-    }
   }
 
   public function toArray()
