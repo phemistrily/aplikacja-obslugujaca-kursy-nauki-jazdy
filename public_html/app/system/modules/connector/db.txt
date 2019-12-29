@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 28 Gru 2019, 19:01
+-- Czas generowania: 29 Gru 2019, 18:20
 -- Wersja serwera: 10.4.8-MariaDB
 -- Wersja PHP: 7.3.10
 
@@ -243,7 +243,9 @@ INSERT INTO `kursantegzamin` (`idKursantEgzamin`, `idKursant`, `idEgzamin`) VALU
 CREATE TABLE `kursantkursprawajazdy` (
   `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL,
   `idKursant` int(10) UNSIGNED NOT NULL,
-  `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL
+  `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL,
+  `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `rezygnacja` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -255,6 +257,7 @@ CREATE TABLE `kursantkursprawajazdy` (
 CREATE TABLE `kursprawajazdy` (
   `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL,
   `idKategoria` int(10) UNSIGNED NOT NULL,
+  `cena` smallint(5) UNSIGNED NOT NULL,
   `dataRozpoczecia` date NOT NULL,
   `dataZakonczenia` date NOT NULL,
   `idInstruktor` int(10) UNSIGNED NOT NULL
@@ -264,9 +267,9 @@ CREATE TABLE `kursprawajazdy` (
 -- Zrzut danych tabeli `kursprawajazdy`
 --
 
-INSERT INTO `kursprawajazdy` (`idKursPrawaJazdy`, `idKategoria`, `dataRozpoczecia`, `dataZakonczenia`, `idInstruktor`) VALUES
-(1, 6, '2020-01-12', '2020-02-09', 3),
-(2, 8, '2020-01-26', '2020-02-23', 3);
+INSERT INTO `kursprawajazdy` (`idKursPrawaJazdy`, `idKategoria`, `cena`, `dataRozpoczecia`, `dataZakonczenia`, `idInstruktor`) VALUES
+(1, 6, 1200, '2020-01-12', '2020-02-09', 3),
+(2, 8, 1800, '2020-01-26', '2020-02-23', 3);
 
 -- --------------------------------------------------------
 
@@ -317,13 +320,15 @@ INSERT INTO `licencjaegzaminatorkategoriauprawnien` (`idLicEgzKatUpr`, `idLicenc
 
 CREATE TABLE `platnosc` (
   `idPlatnosc` int(10) UNSIGNED NOT NULL,
-  `kwota` varchar(10) NOT NULL,
-  `dataWplaty` date NOT NULL,
+  `idKursant` int(10) UNSIGNED NOT NULL,
+  `kwota` smallint(5) UNSIGNED NOT NULL,
+  `dataWplaty` date DEFAULT NULL,
   `terminPlatnosci` date NOT NULL,
-  `raty` varchar(10) DEFAULT NULL,
+  `raty` tinyint(4) NOT NULL,
   `idKursPrawaJazdy` int(11) DEFAULT NULL,
   `idEgzamin` int(11) DEFAULT NULL,
-  `idJazdaSzkoleniowa` int(11) DEFAULT NULL
+  `idJazdaSzkoleniowa` int(11) DEFAULT NULL,
+  `rezygnacja` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -375,13 +380,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `imie`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `typKonta`) VALUES
-(1, 'admin@mord.pl', '', '', '', '0000-00-00', '', '', '', 'admin'),
-(2, 'janlis@mord.pl', '', 'jan', 'lis', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
-(3, 'kowalski@mord.pl', '', 'jan', 'kowalski', '1980-08-15', '80081510203', 'kraków', '100200301', 'instruktor'),
-(4, 'jangil@mord.pl', '', 'jan', 'gil', '1975-09-02', '75090210203', 'nowy sącz', '100200302', 'instruktor'),
-(5, 'natalia.k@mord.pl', '', 'Natalia', 'Krzyk', '1980-03-08', '80030823115', 'Kocie Norki 18', '183375231', 'kursant'),
-(6, 'pawel.w@mord.pl', '', 'Paweł', 'Waligórski', '1979-09-10', '79091023115', 'Albatrosy 15', '183375231', 'kursant'),
-(7, 'roman.d@interia.pl', '', 'Roman', 'Derey', '1973-12-17', '73121712345', 'Bełdno 32', '183375231', 'kursant');
+(1, 'admin@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', '', '', '0000-00-00', '', '', '', 'admin'),
+(2, 'kowalski@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'jan', 'kowalski', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
+(3, 'gil@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'jan', 'gil', '1980-08-15', '80081510203', 'kraków', '100200301', 'instruktor'),
+(4, 'lis@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'jan', 'lis', '1975-09-02', '75090210203', 'nowy sącz', '100200302', 'instruktor'),
+(8, 'dawid@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'dawid', 'kotlarz', '1997-09-30', '97093012345', 'limanowa', '100500300', 'kursant');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -557,7 +560,7 @@ ALTER TABLE `kursantegzamin`
 -- AUTO_INCREMENT dla tabeli `kursantkursprawajazdy`
 --
 ALTER TABLE `kursantkursprawajazdy`
-  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT dla tabeli `kursprawajazdy`
@@ -581,7 +584,7 @@ ALTER TABLE `licencjaegzaminatorkategoriauprawnien`
 -- AUTO_INCREMENT dla tabeli `platnosc`
 --
 ALTER TABLE `platnosc`
-  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `samochod`
@@ -593,5 +596,5 @@ ALTER TABLE `samochod`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;

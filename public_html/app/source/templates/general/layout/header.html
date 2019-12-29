@@ -13,13 +13,12 @@
         <div class="accountMenu">
             {if isset($systemData.session.userId) && $systemData.session.userId != ''}
                 {if $systemData.session.typKonta == 'admin'}
-                    <span>Zalogowany jako Administrator</span>
+                    <span>Administrator</span>
                 {elseif $systemData.session.typKonta == 'instruktor'}
-                    <span>Zalogowany jako Instruktor</span>
+                    <span>Instruktor | {$systemData.session.userName}</span>
                 {else}
-                    <span>Zalogowany jako Kursant</span>
+                    <span>Kursant | {$systemData.session.userName}</span>
                 {/if}
-                <span>{$systemData.session.userName}</span>
                 <a href="?mod=wyloguj">Wyloguj</a>
             {else}
                 <a href="?mod=logowanie">Logowanie</a>

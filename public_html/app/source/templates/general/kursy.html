@@ -2,11 +2,16 @@
 
 
 <div class="headline">Kursy</div>
-
+{if $systemData.get.msg == 'w_juzZapisanyNaKurs'}
+<div class="divArea">
+    Jesteś już zapisany na ten kurs
+</div>
+{/if}
 <table class="tab">
   <tr class="rowTitle">
     <td>Lp.</td>
     <td>Kategoria</td>
+    <td>Cena</td>
     <td>Data rozpoczęcia</td>
     <td>Data zakończenia</td>
     <td>Instruktor prowadzący</td>
@@ -16,12 +21,15 @@
   <tr>
     <td></td>
     <td>{$row.kategoria}</td>
+    <td>{$row.cena} zł</td>
     <td>{$row.dataRozpoczecia}</td>
     <td>{$row.dataZakonczenia}</td>
     <td>{$row.imie} {$row.nazwisko}</td>
     <td>
       <form action="/" method="POST">
         <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
+        <input type="hidden" name="kursCena" value="{$row.cena}">
+        <input type="hidden" name="kursData" value="{$row.dataRozpoczecia}">
         <button name="form" value="zapiszNaKurs" type="submit" class="green-btn-min">Zapisz się</button>
       </form>
     </td>

@@ -38,7 +38,13 @@ class PostFormHandler extends Handler
         $this->controller->zapiszNaKurs($_POST);
         die();
         break;
-
+      case 'rezygnujKurs':
+        parent::controller('Kursy');
+        $this->controller = new KursyController();
+        $this->controller->rezygnujKurs($_POST);
+        die();
+        break;
+        
       default:
         # code...
         break;

@@ -1,0 +1,55 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Moje kursy</div>
+{if $systemData.get.msg == 'w_rezygnacjaKurs'}
+<div class="divArea">
+    Zrezygnowano z kursu
+</div>
+{/if}
+{if !empty($applicationData.mojeKursyList)}
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Kategoria</td>
+    <td>Cena</td>
+    <td>Data rozpoczęcia</td>
+    <td>Data zakończenia</td>
+    <td>Instruktor prowadzący</td>
+    <td>Zapisano się</td>
+    <td>Opłacony</td>
+    <td></td>
+    <td></td>
+  </tr>
+  {foreach $applicationData.mojeKursyList as $row}
+  <tr>
+    <td></td>
+    <td>{$row.kategoria}</td>
+    <td>{$row.cena} zł</td>
+    <td>{$row.dataRozpoczecia}</td>
+    <td>{$row.dataZakonczenia}</td>
+    <td>{$row.imieI} {$row.nazwiskoI}</td>
+    <td>{$row.createdDate}</td>
+    <td>nie</td>
+    <td>
+      <form action="/" method="POST">
+        <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
+        <button name="form" value="oplacKurs" type="submit" class="green-btn-min">Opłać</button>
+      </form>
+    </td>
+    <td>
+      <form action="/" method="POST">
+        <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
+        <button name="form" value="rezygnujKurs" type="submit" class="green-btn-min">Zrezygnuj</button>
+      </form>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Nie jesteś zapisany na żaden kurs.
+{/if}
+
+
+{include file="layout/footer.html"}
+

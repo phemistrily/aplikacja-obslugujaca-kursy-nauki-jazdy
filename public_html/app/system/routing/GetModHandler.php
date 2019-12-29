@@ -34,6 +34,11 @@ class GetModHandler extends Handler
         $this->controller = new KursyController();
         $this->controller->kursyView();
         break;
+      case 'mojekursy':
+        parent::controller('Kursy');
+        $this->controller = new KursyController();
+        $this->controller->mojeKursyView();
+        break;
       case 'egzaminy':
         parent::controller('Egzaminy');
         $this->controller = new EgzaminyController();

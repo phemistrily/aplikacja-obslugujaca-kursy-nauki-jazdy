@@ -20,17 +20,40 @@ class KursyController extends BaseController
     
   }
 
+  public function mojeKursyView(){
+    parent::$applicationData['headTitle'] = 'MORD | Moje kursy';
+
+    parent::$applicationData['mojeKursyList'] = $this->kursy->getMojeKursyList();
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'mojeKursy';
+    
+  }
+
 
   public function zapiszNaKurs(){
     
     if(isset($_SESSION['userId'])) {
-      $this->kursy->zapiszNaKurs($_POST);
+      $result = $this->kursy->zapiszNaKurs($_POST);
+      if($result){
+        parent::redirect('/?mod=mojekursy&msg=w_zapisanoNaKurs');
+      } else {
+        parent::redirect('/?mod=kursy&msg=w_juzZapisanyNaKurs');
+      }
       
     } else {
       parent::redirect('/?mod=logowanie&msg=w_zapiszNaKurs');
     }
-    //parent::redirect('/?mod=kursy');
   }
 
+  public function rezygnujKurs(){
+    
+    if(isset($_SESSION['userId'])) {
+      $this->kursy->rezygnujKurs($_POST);
+      parent::redirect('/?mod=mojekursy&msg=w_rezygnacjaKurs');
+    }
+  }
+
+  
 
 }
