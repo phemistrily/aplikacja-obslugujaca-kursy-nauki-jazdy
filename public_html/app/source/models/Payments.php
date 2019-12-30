@@ -1,12 +1,12 @@
 <?php
-class Platnosci
+class Payments
 {
     public function __construct()
     {
         Sql::connectSql1();
     }
 
-    public function getMojePlatnosciList(){
+    public function getMyPaymentsList(){
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
@@ -19,7 +19,7 @@ class Platnosci
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
-        $query = "SELECT * FROM raty WHERE idKursant = :kursantId";
+        $query = "SELECT * FROM raty WHERE idKursant = :kursantId AND rezygnacja = 0";
         Sql::$sql1->run($query, $params);
         return Sql::$sql1->toArray();
     }

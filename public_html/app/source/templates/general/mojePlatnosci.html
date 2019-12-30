@@ -8,7 +8,7 @@
 </div>
 {/if}
 
-{if !empty($applicationData.mojePlatnosciList)}
+{if !empty($applicationData.myPaymentsList)}
 <table class="tab">
   <tr class="rowTitle">
     <td>Lp.</td>
@@ -21,7 +21,7 @@
     <td></td>
     <td></td>
   </tr>
-  {foreach $applicationData.mojePlatnosciList as $row}
+  {foreach $applicationData.myPaymentsList as $row}
   <tr>
     <td></td>
     <td>{$row.kwota} zł</td>

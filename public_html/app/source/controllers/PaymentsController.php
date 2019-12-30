@@ -1,20 +1,20 @@
 <?php
-class PlatnosciController extends BaseController
+class PaymentsController extends BaseController
 {
-  private $platnosci;
+  private $payments;
 
   public function __construct()
   {
-    parent::model('Platnosci');
-    $this->platnosci = new Platnosci();
+    parent::model('Payments');
+    $this->payments = new Payments();
   }
 
 
 
-  public function mojePlatnosciView(){
+  public function myPaymentsView(){
     parent::$applicationData['headTitle'] = 'MORD | Moje płatności';
 
-    parent::$applicationData['mojePlatnosciList'] = $this->platnosci->getMojePlatnosciList();
+    parent::$applicationData['myPaymentsList'] = $this->payments->getMyPaymentsList();
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'mojePlatnosci';
@@ -24,7 +24,7 @@ class PlatnosciController extends BaseController
   public function mojeRatyView(){
     parent::$applicationData['headTitle'] = 'MORD | Moje raty';
 
-    parent::$applicationData['mojeRatyList'] = $this->platnosci->getMojeRatyList();
+    parent::$applicationData['mojeRatyList'] = $this->payments->getMojeRatyList();
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'mojeRaty';
@@ -35,7 +35,7 @@ class PlatnosciController extends BaseController
   
   public function wlaczRaty($post){
     
-    $result = $this->platnosci->wlaczRaty($post);
+    $result = $this->payments->wlaczRaty($post);
     parent::redirect('/?mod=mojeplatnosci&msg=w_wlaczonoRaty');
   }
 }

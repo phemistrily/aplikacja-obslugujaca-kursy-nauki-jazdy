@@ -30,34 +30,34 @@ class GetModHandler extends Handler
         break;
 
       case 'kursy':
-        parent::controller('Kursy');
-        $this->controller = new KursyController();
-        $this->controller->kursyView();
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
+        $this->controller->coursesView();
         break;
       case 'mojekursy':
-        parent::controller('Kursy');
-        $this->controller = new KursyController();
-        $this->controller->mojeKursyView();
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
+        $this->controller->myCoursesView();
         break;
       case 'egzaminy':
-        parent::controller('Egzaminy');
-        $this->controller = new EgzaminyController();
-        $this->controller->egzaminyView();
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->examsView();
         break;
       case 'mojeegzaminy':
-        parent::controller('Egzaminy');
-        $this->controller = new EgzaminyController();
-        $this->controller->mojeEgzaminyView();
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->myExamsView();
         break;
 
       case 'mojeplatnosci':
-        parent::controller('Platnosci');
-        $this->controller = new PlatnosciController();
-        $this->controller->mojePlatnosciView();
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
+        $this->controller->myPaymentsView();
         break;
       case 'mojeraty':
-        parent::controller('Platnosci');
-        $this->controller = new PlatnosciController();
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
         $this->controller->mojeRatyView();
         break;
 

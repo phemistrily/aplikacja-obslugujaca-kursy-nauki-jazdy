@@ -1,29 +1,29 @@
 <?php
-class KursyController extends BaseController
+class CoursesController extends BaseController
 {
-  private $kursy;
+  private $courses;
 
   public function __construct()
   {
-    parent::model('Kursy');
-    $this->kursy = new Kursy();
+    parent::model('Courses');
+    $this->courses = new Courses();
   }
 
 
-  public function kursyView(){
+  public function coursesView(){
     parent::$applicationData['headTitle'] = 'MORD | Kursy';
 
-    parent::$applicationData['kursyList'] = $this->kursy->getKursyList();
+    parent::$applicationData['coursesList'] = $this->courses->getCoursesList();
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'kursy';
     
   }
 
-  public function mojeKursyView(){
+  public function myCoursesView(){
     parent::$applicationData['headTitle'] = 'MORD | Moje kursy';
 
-    parent::$applicationData['mojeKursyList'] = $this->kursy->getMojeKursyList();
+    parent::$applicationData['myCoursesList'] = $this->courses->getMyCoursesList();
 
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'mojeKursy';
@@ -34,7 +34,7 @@ class KursyController extends BaseController
   public function zapiszNaKurs($post){
     
     if(isset($_SESSION['userId'])) {
-      $result = $this->kursy->zapiszNaKurs($post);
+      $result = $this->courses->zapiszNaKurs($post);
       if($result){
         parent::redirect('/?mod=mojekursy&msg=w_zapisanoNaKurs');
       } else {
@@ -48,7 +48,7 @@ class KursyController extends BaseController
 
   public function rezygnujKurs($post){
     
-    $this->kursy->rezygnujKurs($post);
+    $this->courses->rezygnujKurs($post);
     parent::redirect('/?mod=mojekursy&msg=w_rezygnacjaKurs');
   }
 

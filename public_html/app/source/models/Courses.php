@@ -1,5 +1,5 @@
 <?php
-class Kursy
+class Courses
 {
     public function __construct()
     {
@@ -7,7 +7,7 @@ class Kursy
     }
 
 
-    public function getKursyList()
+    public function getCoursesList()
     {
         $query = "SELECT kj.*, k.nazwa as kategoria, u.imie, u.nazwisko FROM kursprawajazdy kj INNER JOIN kategoria k ON k.idKategoria = kj.idKategoria INNER JOIN users u ON u.id = kj.idInstruktor";
 
@@ -15,7 +15,7 @@ class Kursy
         return Sql::$sql1->toArray();
     }
 
-    public function getMojeKursyList(){
+    public function getMyCoursesList(){
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
@@ -25,9 +25,9 @@ class Kursy
     }
 
 
-    public function zapiszNaKurs($kursData){
+    public function zapiszNaKurs($courseData){
         $params = [
-            'kursId' => $kursData['kursId'],
+            'kursId' => $courseData['kursId'],
             'kursantId' => $_SESSION['userId']
         ];
 
@@ -39,11 +39,11 @@ class Kursy
             $query = "INSERT INTO kursantkursprawajazdy(idKursant, idKursPrawaJazdy) VALUES(:kursantId, :kursId)";
             Sql::$sql1->run($query, $params);
 
-            $terminPlat = strtotime($kursData['kursData']);
+            $terminPlat = strtotime($courseData['kursData']);
             $terminPlat = strtotime('+7 day', $terminPlat);
             $terminPlat = date('Y-m-d', $terminPlat);
             $params['terminPlatnosci'] = $terminPlat;
-            $params['kursCena'] = $kursData['kursCena'];
+            $params['kursCena'] = $courseData['kursCena'];
 
             $query = "INSERT INTO platnosc(idKursant, kwota, terminPlatnosci, idKursPrawaJazdy) VALUES(:kursantId, :kursCena, :terminPlatnosci, :kursId)";
             Sql::$sql1->run($query, $params);
@@ -51,16 +51,27 @@ class Kursy
         }
     }
 
-    public function rezygnujKurs($kursData){
+    public function rezygnujKurs($courseData){
         $params = [
-            'kursId' => $kursData['kursId'],
+            'kursId' => $courseData['kursId'],
             'kursantId' => $_SESSION['userId']
         ];
 
         $query = "UPDATE kursantkursprawajazdy SET rezygnacja = '1' WHERE idKursant = :kursantId AND idKursPrawaJazdy = :kursId AND rezygnacja = 0";
         Sql::$sql1->run($query, $params);
 
+        $query = "SELECT idPlatnosc FROM platnosc WHERE idKursant = :kursantId AND idKursPrawaJazdy = :kursId AND rezygnacja = 0";
+        Sql::$sql1->run($query, $params);
+        $rowPaymantId = Sql::$sql1->toArray();
+
         $query = "UPDATE platnosc SET rezygnacja = '1' WHERE idKursant = :kursantId AND idKursPrawaJazdy = :kursId AND rezygnacja = 0";
+        Sql::$sql1->run($query, $params);
+
+        $params = [
+            'kursantId' => $_SESSION['userId'],
+            'platnoscId' => $rowPaymantId[0]['idPlatnosc']
+        ];
+        $query = "UPDATE raty SET rezygnacja = '1' WHERE idKursant = :kursantId AND idPlatnosc = :platnoscId AND rezygnacja = 0";
         Sql::$sql1->run($query, $params);
 
         return true;

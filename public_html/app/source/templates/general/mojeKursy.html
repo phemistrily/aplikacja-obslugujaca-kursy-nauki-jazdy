@@ -7,7 +7,7 @@
     Zrezygnowano z kursu
 </div>
 {/if}
-{if !empty($applicationData.mojeKursyList)}
+{if !empty($applicationData.myCoursesList)}
 <table class="tab">
   <tr class="rowTitle">
     <td>Lp.</td>
@@ -21,7 +21,7 @@
     <td></td>
     <td></td>
   </tr>
-  {foreach $applicationData.mojeKursyList as $row}
+  {foreach $applicationData.myCoursesList as $row}
   <tr>
     <td></td>
     <td>{$row.kategoria}</td>

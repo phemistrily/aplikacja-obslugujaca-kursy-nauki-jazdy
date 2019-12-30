@@ -33,20 +33,20 @@ class PostFormHandler extends Handler
         die();
       break;
       case 'zapiszNaKurs':
-        parent::controller('Kursy');
-        $this->controller = new KursyController();
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
         $this->controller->zapiszNaKurs($_POST);
         die();
         break;
       case 'rezygnujKurs':
-        parent::controller('Kursy');
-        $this->controller = new KursyController();
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
         $this->controller->rezygnujKurs($_POST);
         die();
         break;
       case 'wlaczRaty':
-        parent::controller('Platnosci');
-        $this->controller = new PlatnosciController();
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
         $this->controller->wlaczRaty($_POST);
         die();
         break;
