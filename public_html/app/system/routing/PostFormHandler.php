@@ -50,6 +50,13 @@ class PostFormHandler extends Handler
         $this->controller->wlaczRaty($_POST);
         die();
         break;
+
+      case 'registerDriving':
+        parent::controller('Driving');
+        $this->controller = new DrivingController();
+        $this->controller->registerDriving($_POST);
+        die();
+        break;
         
       default:
         # code...

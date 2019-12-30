@@ -19,7 +19,7 @@ class Courses
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
-        $query = "SELECT kkpj.*, kpj.*, k.nazwa as kategoria, u.imie as imieI, u.nazwisko as nazwiskoI FROM kursantkursprawajazdy kkpj INNER JOIN kursprawajazdy kpj ON kpj.idKursPrawaJazdy = kkpj.idKursPrawaJazdy INNER JOIN kategoria k ON k.idKategoria = kpj.idKategoria INNER JOIN users u ON u.id = kpj.idInstruktor WHERE kkpj.idKursant = :kursantId AND kkpj.rezygnacja != 1";
+        $query = "SELECT kkpj.*, kpj.*, k.nazwa as kategoria, CONCAT(u.imie,' ',u.nazwisko) AS instruktorKursu, CONCAT(uj.imie,' ',uj.nazwisko) AS instruktorJazd FROM kursantkursprawajazdy kkpj INNER JOIN kursprawajazdy kpj ON kpj.idKursPrawaJazdy = kkpj.idKursPrawaJazdy INNER JOIN kategoria k ON k.idKategoria = kpj.idKategoria INNER JOIN users u ON u.id = kpj.idInstruktor INNER JOIN users uj ON uj.id = kkpj.idInstruktor WHERE kkpj.idKursant = :kursantId AND kkpj.rezygnacja != 1";
         Sql::$sql1->run($query, $params);
         return Sql::$sql1->toArray();
     }
@@ -28,7 +28,7 @@ class Courses
     public function zapiszNaKurs($courseData){
         $params = [
             'kursId' => $courseData['kursId'],
-            'kursantId' => $_SESSION['userId']
+            'kursantId' => $_SESSION['userId'],
         ];
 
         $query = "SELECT * FROM kursantkursprawajazdy WHERE idKursant = :kursantId AND idKursPrawaJazdy = :kursId AND rezygnacja != 1";
@@ -36,9 +36,15 @@ class Courses
         if(Sql::$sql1->toArray()){
             return false;
         } else {
-            $query = "INSERT INTO kursantkursprawajazdy(idKursant, idKursPrawaJazdy) VALUES(:kursantId, :kursId)";
+            $params['instruktorId'] = 4;
+            $params['samochodId'] = 3;
+            $query = "INSERT INTO kursantkursprawajazdy(idKursant, idKursPrawaJazdy, idInstruktor, idSamochod) VALUES(:kursantId, :kursId, :instruktorId, :samochodId)";
             Sql::$sql1->run($query, $params);
 
+            $params = [
+                'kursId' => $courseData['kursId'],
+                'kursantId' => $_SESSION['userId'],
+            ];
             $terminPlat = strtotime($courseData['kursData']);
             $terminPlat = strtotime('+7 day', $terminPlat);
             $terminPlat = date('Y-m-d', $terminPlat);
