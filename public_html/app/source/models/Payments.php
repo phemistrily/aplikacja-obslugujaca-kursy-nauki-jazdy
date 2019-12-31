@@ -10,7 +10,7 @@ class Payments
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
-        $query = "SELECT * FROM platnosc WHERE idKursant = :kursantId AND rezygnacja != 1";
+        $query = "SELECT * FROM platnosc WHERE idKursant = :kursantId AND rezygnacja != 1 ORDER BY idPlatnosc DESC";
         Sql::$sql1->run($query, $params);
         return Sql::$sql1->toArray();
     }
@@ -19,7 +19,7 @@ class Payments
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
-        $query = "SELECT * FROM raty WHERE idKursant = :kursantId AND rezygnacja = 0";
+        $query = "SELECT * FROM raty WHERE idKursant = :kursantId AND rezygnacja = 0 ORDER BY idPlatnosc DESC, terminPlatnosci ASC";
         Sql::$sql1->run($query, $params);
         return Sql::$sql1->toArray();
     }
@@ -66,6 +66,61 @@ class Payments
         Sql::$sql1->run($query, $params);
     }
 
+
+    public function paymentCourse($paymentData){
+        $paymentDate = date('Y-m-d');
+
+        $params = [
+            'dataWplaty' => $paymentDate,
+            'platnoscId' => $paymentData['platnoscId']
+        ];
+        $query = "UPDATE platnosc SET dataWplaty = :dataWplaty  WHERE idPlatnosc = :platnoscId";
+        Sql::$sql1->run($query, $params);
+        return true;
+    }
+
+
+    public function paymentPartCourse($paymentData){
+        $paymentDate = date('Y-m-d');
+        
+        $idRaty = $paymentData['ratyId'];
+        $idPlatnosc = $paymentData['platnoscId'];
+
+       
+
+        $params = [
+            'dataWplaty' => $paymentDate,
+            'ratyId' => $idRaty
+        ];
+        $query = "UPDATE raty SET dataWplaty = :dataWplaty  WHERE idRaty = :ratyId";
+        Sql::$sql1->run($query, $params);
+
+
+        $params = [
+            'platnoscId' => $idPlatnosc
+        ];
+        $query = "SELECT SUM(kwota) AS amountSum FROM raty WHERE idPlatnosc = :platnoscId";
+        Sql::$sql1->run($query, $params);
+        $rowAmountSum = Sql::$sql1->toArray();
+        $amountSum = $rowAmountSum[0]['amountSum'];
+
+        $query = "SELECT SUM(kwota) AS paymentSum FROM raty WHERE idPlatnosc = :platnoscId AND dataWplaty != ''";
+        Sql::$sql1->run($query, $params);
+        $rowPaymentSum = Sql::$sql1->toArray();
+        $paymentSum = $rowPaymentSum[0]['paymentSum'];
+
+        
+        if($paymentSum == $amountSum) 
+        {
+            $params = [
+                'dataWplaty' => $paymentDate,
+                'platnoscId' => $idPlatnosc
+            ];
+            $query = "UPDATE platnosc SET dataWplaty = :dataWplaty  WHERE idPlatnosc = :platnoscId";
+            Sql::$sql1->run($query, $params);
+        }
+        return true;
+    }
     
 }
 

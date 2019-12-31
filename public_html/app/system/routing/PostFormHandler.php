@@ -58,6 +58,27 @@ class PostFormHandler extends Handler
         die();
         break;
         
+      case 'buyDriving':
+        parent::controller('Driving');
+        $this->controller = new DrivingController();
+        $this->controller->buyDriving($_POST);
+        die();
+        break;
+
+      case 'paymentCourse':
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
+        $this->controller->paymentCourse($_POST);
+        die();
+        break;
+
+      case 'paymentPartCourse':
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
+        $this->controller->paymentPartCourse($_POST);
+        die();
+        break;
+        
       default:
         # code...
         break;

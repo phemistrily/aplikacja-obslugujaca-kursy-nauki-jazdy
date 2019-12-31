@@ -18,4 +18,13 @@ class ExamsController extends BaseController
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'egzaminy';
   }
+
+  public function myExamsView(){
+    parent::$applicationData['headTitle'] = 'MORD | Moje egzaminy';
+
+    parent::$applicationData['myExamsList'] = $this->exams->getMyExamsList();
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'mojeEgzaminy';
+  }
 }

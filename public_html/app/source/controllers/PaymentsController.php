@@ -38,4 +38,17 @@ class PaymentsController extends BaseController
     $result = $this->payments->wlaczRaty($post);
     parent::redirect('/?mod=mojeplatnosci&msg=w_wlaczonoRaty');
   }
+
+
+  public function paymentCourse($post){
+    
+    $result = $this->payments->paymentCourse($post);
+    parent::redirect('/?mod=mojeplatnosci&msg=w_oplaconoKurs');
+  }
+
+  public function paymentPartCourse($post){
+    
+    $result = $this->payments->paymentPartCourse($post);
+    parent::redirect('/?mod=mojeraty&msg=w_oplaconoRate');
+  }
 }

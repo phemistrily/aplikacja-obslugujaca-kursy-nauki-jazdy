@@ -6,6 +6,10 @@
 <div class="divArea">
     Raty zostały włączone
 </div>
+{elseif $systemData.get.msg == 'w_oplaconoKurs'}
+<div class="divArea">
+    Opłacono kurs
+</div>
 {/if}
 
 {if !empty($applicationData.myPaymentsList)}
@@ -50,17 +54,19 @@
       <td>-</td>
     {/if}
 
-    {if $row.raty == 1}
+    {if $row.raty == 1 && $row.dataWplaty == NULL}
       <td colspan="2"><a href="/?mod=mojeraty" class="green-btn-min">Opłać raty</a></td>
     {else}
       <td>
-        <form action="/" method="POST">
-          <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
-          <button name="form" value="oplacKurs" type="submit" class="green-btn-min">Opłać</button>
-        </form>
+        {if $row.dataWplaty == NULL}
+          <form action="/" method="POST">
+            <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
+            <button name="form" value="paymentCourse" type="submit" class="green-btn-min">Opłać</button>
+          </form>
+        {/if}
       </td>
       <td>
-        {if $row.idKursPrawaJazdy != 0}
+        {if $row.idKursPrawaJazdy != 0 && $row.dataWplaty == NULL}
           <form action="/" method="POST">
             <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
             <input type="hidden" name="platnoscKwota" value="{$row.kwota}">

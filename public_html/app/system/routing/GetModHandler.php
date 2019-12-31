@@ -85,6 +85,14 @@ class GetModHandler extends Handler
         $this->controller->chooseDrivingDate();
         break;
 
+      case 'wykupjazde':
+        parent::controller('Driving');
+        $this->controller = new DrivingController();
+        $this->controller->buyDrivingDate();
+        break;
+
+        
+
       default:
         header('location: /');
         die();
