@@ -13,8 +13,7 @@ class UsersController extends BaseController
   public function loginView(){
     parent::$applicationData['headTitle'] = 'MORD | Logowanie';
 
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'logowanie';
+    $this->setTemplate('logowanie');
     
   }
 
@@ -23,8 +22,7 @@ class UsersController extends BaseController
   {
     parent::$applicationData['headTitle'] = 'MORD | Rejestracja';
 
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'rejestracja';
+    $this->setTemplate('rejestracja');
   }
 
 
@@ -70,8 +68,7 @@ class UsersController extends BaseController
 
     parent::$applicationData['instruktorList'] = $this->users->getInstruktorList();
 
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'instruktorzy';
+    $this->setTemplate('instruktorzy');
   }
 
   public function kursanciView(){
@@ -79,7 +76,46 @@ class UsersController extends BaseController
 
     parent::$applicationData['kursantList'] = $this->users->getKursantList();
 
+    $this->setTemplate('kursanci');
+  }
+
+  public function setUserSettingsView()
+  {
+    parent::$applicationData['headTitle'] = 'MORD | Zarządzaj użytkownikami';
+    if($_SESSION['typKonta'] == 'admin')
+    {
+      parent::$applicationData['userList'] = $this->users->getUsers();
+      $this->setTemplate('zarzadzanieUzytkownikami');
+    }
+    else
+    {
+      $this->setTemplate('youShallNotPass');
+    }
+  }
+
+  public function getUserEditView()
+  {
+    if($_SESSION['typKonta'] == 'admin')
+    {
+      parent::$applicationData['userData'] = $this->users->getUser($_GET['id']);
+      parent::$applicationData['headTitle'] = 'MORD | Edytuj użytkownika ' . parent::$applicationData['userData'][0]['email'];
+      $this->setTemplate('edytujUzytkownika');
+    }
+    else
+    {
+      $this->setTemplate('youShallNotPass');
+    }
+  }
+
+  public function editUser($post)
+  {
+    var_dump($post);
+    die();
+  }
+
+  private function setTemplate($templateName)
+  {
     ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'kursanci';
+    ModuleController::$template = $templateName;
   }
 }

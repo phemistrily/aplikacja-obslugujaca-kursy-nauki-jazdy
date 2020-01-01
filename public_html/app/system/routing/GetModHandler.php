@@ -84,7 +84,17 @@ class GetModHandler extends Handler
         $this->controller = new DrivingController();
         $this->controller->chooseDrivingDate();
         break;
-
+      
+      case 'zarzadzajUzytkownikami':
+        parent::controller('Users');
+        $this->controller = new UsersController();
+        $this->controller->setUserSettingsView();
+        break;
+      case 'edytujUzytkownika':
+        parent::controller('Users');
+        $this->controller = new UsersController();
+        $this->controller->getUserEditView();
+        break;
       default:
         header('location: /');
         die();

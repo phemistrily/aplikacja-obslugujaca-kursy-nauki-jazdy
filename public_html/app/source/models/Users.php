@@ -8,7 +8,32 @@ class Users
 
     public function getUsers()
     {
-        $query = "SELECT * FROM users";
+        $query = "SELECT id,
+        email,
+        imie,
+        nazwisko,
+        dataUrodzenia,
+        pesel,
+        adresZamieszkania,
+        numerTelefonu,
+        typKonta FROM users";
+
+        Sql::$sql1->run($query);
+        return Sql::$sql1->toArray();
+    }
+
+    public function getUser($id)
+    {
+        $query = "SELECT id,
+        email,
+        imie,
+        nazwisko,
+        dataUrodzenia,
+        pesel,
+        adresZamieszkania,
+        numerTelefonu,
+        typKonta FROM users
+        WHERE id = $id";
 
         Sql::$sql1->run($query);
         return Sql::$sql1->toArray();
