@@ -28,11 +28,26 @@ class DrivingController extends BaseController
     
   }
 
+  public function buyDrivingDate(){
+    parent::$applicationData['headTitle'] = 'MORD | Wykup dodatkową jazdę';
+
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'wykupjazde';
+    
+  }
+
 
   public function registerDriving($post){
     $result = $this->driving->registerDriving($post);
     
     parent::redirect('/?mod=mojejazdy&msg=w_ustalonoJazde');
+    
+  }
+
+  public function buyDriving($post){
+    $result = $this->driving->buyDriving($post);
+    
+    parent::redirect('/?mod=mojejazdy&msg=w_wykupionoJazde');
     
   }
   

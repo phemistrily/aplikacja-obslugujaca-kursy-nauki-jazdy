@@ -4,6 +4,17 @@
 <div class="headline">Moje Jazdy</div>
 
 <a href="/?mod=terminjazdy" class="green-btn-min">Ustal termin jazdy</a>
+<a href="/?mod=wykupjazde" class="green-btn-min">Wykup dodatkową jazdę</a>
+
+{if $systemData.get.msg == 'w_ustalonoJazde'}
+<div class="divArea">
+  Dodano termin jazdy szkolenowej
+</div>
+{elseif $systemData.get.msg == 'w_wykupionoJazde'}
+<div class="divArea">
+  Wykupiono dodatkową jazdę
+</div>
+{/if}
 
 {if !empty($applicationData.myDrivingList)}
 <table class="tab">
@@ -15,6 +26,7 @@
     <td>Instruktor</td>
     <td>Samochód</td>
     <td>Status</td>
+    <td></td>
     <td></td>
   </tr>
   {foreach $applicationData.myDrivingList as $row}
@@ -31,12 +43,14 @@
       <td>potwierdzona</td>
     {/if}
     <td>
-      <!--
-      <a href="/?mod=mojeplatnosci" class="green-btn-min">Opłać</a>
-      <form action="/" method="POST">
-        <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
-        <button name="form" value="oplacKurs" type="submit" class="green-btn-min">Opłać</button>
-      </form>-->
+      {if $row.buy == 1}
+      płatna
+      {/if}
+    </td>
+    <td>
+      {if $row.buy == 1}
+        <a href="/?mod=mojeplatnosci" class="green-btn-min">Opłać</a>
+      {/if}
     </td>
   </tr>
   {/foreach}

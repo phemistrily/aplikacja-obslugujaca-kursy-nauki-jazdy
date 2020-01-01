@@ -3,6 +3,11 @@
 
 <div class="headline">Moje raty</div>
 
+{if $systemData.get.msg == 'w_oplaconoRate'}
+<div class="divArea">
+    Opłacono ratę
+</div>
+{/if}
 
 {if !empty($applicationData.mojeRatyList)}
 <table class="tab">
@@ -32,10 +37,13 @@
       <td></td>
     {else}
       <td>
-        <form action="/" method="POST">
-          <input type="hidden" name="idRaty" value="{$row.idRaty}">
-          <button name="form" value="oplacRate" type="submit" class="green-btn-min">Opłać</button>
-        </form>
+        {if $row.dataWplaty == NULL}
+          <form action="/" method="POST">
+            <input type="hidden" name="ratyId" value="{$row.idRaty}">
+            <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
+            <button name="form" value="paymentPartCourse" type="submit" class="green-btn-min">Opłać</button>
+          </form>
+        {/if}
       </td>
     {/if}
   </tr>

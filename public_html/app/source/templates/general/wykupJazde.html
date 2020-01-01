@@ -1,18 +1,18 @@
 {include file="layout/header.html"}
 
 
-<div class="headline">Ustal termin jazdy</div>
+<div class="headline">Wykup dodatkową jazdę</div>
 
 <div class="formArea">
   <form action="/" method="POST">
 
     <div class="formDiv">
-      <label>Data jazdy</label>
+        <label>Data jazdy</label>
       <input type="date" name="dataJazdy" placeholder="Data jazdy" required />
     </div>
 
     <div class="formDiv">
-      <label>Godz. rozpoczęcia</label>
+      <label>Godz. rozpoczecia</label>
       <input type="time" name="godzStart" placeholder="Godz. rozpoczęcia" required />
     </div>
 
@@ -22,9 +22,10 @@
     </div>
 
     <div class="formDiv">
-      <button name="form" value="registerDriving" type="submit" class="green-btn">Ustal jazdę</button>
+      <button name="form" value="buyDriving" type="submit" class="green-btn">Wykup jazdę</button>
     </div>
 
   </form>
 </div>
+
 {include file="layout/footer.html"}
