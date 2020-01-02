@@ -3,7 +3,7 @@
 
 <div class="headline">Użytkownik {$applicationData.userData.0.email}</div>
 
-<form method="POST">
+<form method="POST" action="/">
   {foreach from=$applicationData.userData key=key item=row}
     <label>Imię</label>
     <input type="text" name="imie" value="{$row.imie}" />
@@ -26,6 +26,7 @@
     <br />
     <br />
   {/foreach}
+  <input type="hidden" name="id" value="{$row.id}">
   <input type="hidden" name="form" value="editUser"/>
   <input type="submit" value="Zapisz"/>
 </form>

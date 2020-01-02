@@ -39,6 +39,39 @@ class Users
         return Sql::$sql1->toArray();
     }
 
+    public function editUser($userData)
+    {
+        if(!$userData['id'] && !is_numeric($userData['id']))
+        {
+            return false;
+        }
+        foreach ($userData as $key => $value) {
+            var_dump($key);
+            var_dump($value);
+            $toUpdate = '';
+            switch ($key) {
+                case 'imie':
+                case 'nazwisko':
+                case 'dataUrodzenia':
+                case 'pesel':
+                case 'adresZamieszkania':
+                case 'numerTelefonu':
+                    $toUpdate = $key;
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            if ($toUpdate)
+            {
+                $query = "UPDATE users SET $toUpdate = '$value'";
+                var_dump($query);
+                //Sql::$sql1->run($query);
+            }
+        }
+    }
+
     public function loginUser($loginData)
     {
         $parms = [

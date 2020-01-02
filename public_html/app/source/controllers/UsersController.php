@@ -109,6 +109,7 @@ class UsersController extends BaseController
 
   public function editUser($post)
   {
+    $user = $this->users->editUser($post);
     var_dump($post);
     die();
   }
