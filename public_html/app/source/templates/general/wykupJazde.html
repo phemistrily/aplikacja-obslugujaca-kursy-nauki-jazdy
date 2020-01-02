@@ -1,0 +1,31 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Wykup dodatkową jazdę</div>
+
+<div class="formArea">
+  <form action="/" method="POST">
+
+    <div class="formDiv">
+        <label>Data jazdy</label>
+      <input type="date" name="dataJazdy" placeholder="Data jazdy" required />
+    </div>
+
+    <div class="formDiv">
+      <label>Godz. rozpoczecia</label>
+      <input type="time" name="godzStart" placeholder="Godz. rozpoczęcia" required />
+    </div>
+
+    <div class="formDiv">
+      <label>Godz. zakończenia</label>
+      <input type="time" name="godzStop" placeholder="Godz. zakończenia" required />
+    </div>
+
+    <div class="formDiv">
+      <button name="form" value="buyDriving" type="submit" class="green-btn">Wykup jazdę</button>
+    </div>
+
+  </form>
+</div>
+
+{include file="layout/footer.html"}

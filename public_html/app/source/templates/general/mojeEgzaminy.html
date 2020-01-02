@@ -1,24 +1,22 @@
 {include file="layout/header.html"}
 
 
-<div class="headline">Egzaminy</div>
+<div class="headline">Moje egzaminy</div>
 
 <table class="tab">
   <tr class="rowTitle">
     <td>Lp.</td>
     <td>Typ</td>
     <td>Kategoria</td>
-    <td>Kursant</td>
     <td>Egzaminator</td>
     <td>Data</td>
     <td>Wynik</td>
   </tr>
-  {foreach $applicationData.examsList as $row}
+  {foreach $applicationData.myExamsList as $row}
   <tr>
     <td></td>
     <td>{$row.typ}</td>
     <td>{$row.kategoria}</td>
-    <td>{$row.imieK} {$row.nazwiskoK}</td>
     <td>{$row.imieI} {$row.nazwiskoI}</td>
     <td>{$row.data}</td>
     <td>{$row.wynik}</td>

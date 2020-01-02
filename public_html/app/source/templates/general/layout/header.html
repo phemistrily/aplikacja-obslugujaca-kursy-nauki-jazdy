@@ -11,8 +11,19 @@
 <header id="header">
     <div class="container">
         <div class="accountMenu">
-            <a href="?mod=logowanie">Logowanie</a>
-            <a href="?mod=rejestracja">Rejestracja</a>
+            {if isset($systemData.session.userId) && $systemData.session.userId != ''}
+                {if $systemData.session.typKonta == 'admin'}
+                    <span>Administrator</span>
+                {elseif $systemData.session.typKonta == 'instruktor'}
+                    <span>Instruktor | {$systemData.session.userName}</span>
+                {else}
+                    <span>Kursant | {$systemData.session.userName}</span>
+                {/if}
+                <a href="?mod=wyloguj">Wyloguj</a>
+            {else}
+                <a href="?mod=logowanie">Logowanie</a>
+                <a href="?mod=rejestracja">Rejestracja</a>
+            {/if}
         </div>
         <div class="appHeader">
             Małopolski Ośrodek Ruchu Drogowego

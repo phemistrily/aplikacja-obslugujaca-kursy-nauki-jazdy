@@ -1,0 +1,35 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Użytkownik {$applicationData.userData.0.email}</div>
+
+<form method="POST">
+  {foreach from=$applicationData.userData key=key item=row}
+    <label>Imię</label>
+    <input type="text" name="imie" value="{$row.imie}" />
+    <label>Nazwisko</label>
+    <input type="text" name="nazwisko" value="{$row.nazwisko}" />
+    <label>Data urodzenia</label>
+    <input type="date" name="dataUrodzenia" value="{$row.dataUrodzenia}" />
+    <label>PESEL</label>
+    <input type="text" name="pesel" value="{$row.pesel}" />
+    <label>Adres zamieszkania</label>
+    <input type="text" name="adresZamieszkania" value="{$row.adresZamieszkania}"/>
+    <label>Numer telefonu</label>
+    <input type="text" name="numerTelefonu" value="{$row.numerTelefonu}"/>
+    <label>Typ konta</label>
+    <select>
+      <option value="admin"{if $row.typKonta eq admin}selected{/if}>Administrator</option>
+      <option value="instruktor"{if $row.typKonta eq instruktor}selected{/if}>Instruktor</option>
+      <option value="kursant" {if $row.typKonta eq kursant}selected{/if}>Kursant</option>
+    </select>
+    <br />
+    <br />
+  {/foreach}
+  <input type="hidden" name="form" value="editUser"/>
+  <input type="submit" value="Zapisz"/>
+</form>
+
+
+{include file="layout/footer.html"}
+

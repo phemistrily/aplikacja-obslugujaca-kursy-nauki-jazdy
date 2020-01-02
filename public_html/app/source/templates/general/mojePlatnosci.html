@@ -1,0 +1,89 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Moje płatności</div>
+{if $systemData.get.msg == 'w_wlaczonoRaty'}
+<div class="divArea">
+    Raty zostały włączone
+</div>
+{elseif $systemData.get.msg == 'w_oplaconoKurs'}
+<div class="divArea">
+    Opłacono kurs
+</div>
+{/if}
+
+{if !empty($applicationData.myPaymentsList)}
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Kwota</td>
+    <td>Termin płatności</td>
+    <td>Raty</td>
+    <td>Typ opłaty</td>
+    <td>Status płatności</td>
+    <td>Data wpłaty</td>
+    <td></td>
+    <td></td>
+  </tr>
+  {foreach $applicationData.myPaymentsList as $row}
+  <tr>
+    <td></td>
+    <td>{$row.kwota} zł</td>
+    <td>{$row.terminPlatnosci}</td>
+    {if $row.raty == 1}
+      <td>tak</td>
+    {else}
+      <td>nie</td>
+    {/if}
+
+    {if $row.idKursPrawaJazdy != 0}
+     <td>Za kurs</td>
+    {/if}
+    {if $row.idEgzamin != 0}
+     <td>Za egzamin</td>
+    {/if}
+    {if $row.idJazdaSzkoleniowa != 0}
+     <td>Za jazdę</td>
+    {/if}
+
+    {if $row.dataWplaty != NULL}
+      <td>opłacone</td>
+      <td>{$row.dataWplaty}</td>
+    {else}
+      <td>nieopłacone</td>
+      <td>-</td>
+    {/if}
+
+    {if $row.raty == 1 && $row.dataWplaty == NULL}
+      <td colspan="2"><a href="/?mod=mojeraty" class="green-btn-min">Opłać raty</a></td>
+    {else}
+      <td>
+        {if $row.dataWplaty == NULL}
+          <form action="/" method="POST">
+            <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
+            <button name="form" value="paymentCourse" type="submit" class="green-btn-min">Opłać</button>
+          </form>
+        {/if}
+      </td>
+      <td>
+        {if $row.idKursPrawaJazdy != 0 && $row.dataWplaty == NULL}
+          <form action="/" method="POST">
+            <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
+            <input type="hidden" name="platnoscKwota" value="{$row.kwota}">
+            <input type="hidden" name="terminPlatnosci" value="{$row.terminPlatnosci}">
+            <button name="form" value="wlaczRaty" type="submit" class="green-btn-min">Włącz raty</button>
+          </form>
+        {/if}
+      </td>
+    {/if}
+   
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Brak płatności
+{/if}
+
+
+{include file="layout/footer.html"}
+

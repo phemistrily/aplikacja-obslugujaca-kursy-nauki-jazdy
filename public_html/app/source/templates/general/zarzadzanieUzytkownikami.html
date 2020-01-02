@@ -1,0 +1,36 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Użytkownicy</div>
+
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>email</td>
+    <td>Imię i nazwisko</td>
+    <td>Data urodzenia</td>
+    <td>PESEL</td>
+    <td>Adres zamieszkania</td>
+    <td>Numer telefonu</td>
+    <td>Typ konta</td>
+    <td>Edytuj</td>
+  </tr>
+  {foreach from=$applicationData.userList key=key item=row}
+  <tr>
+    <td>{$key+1}</td>
+    <td>{$row.email}</td>
+    <td>{$row.imie} {$row.nazwisko}</td>
+    <td>{$row.dataUrodzenia}</td>
+    <td>{$row.pesel}</td>
+    <td>{$row.adresZamieszkania}</td>
+    <td>{$row.numerTelefonu}</td>
+    <td>{$row.typKonta}</td>
+    <td><a href="?mod=edytujUzytkownika&id={$row.id}">Edytuj</a></td>
+  </tr>
+  {/foreach}
+</table>
+
+
+
+{include file="layout/footer.html"}
+

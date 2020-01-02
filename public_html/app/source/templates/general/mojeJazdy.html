@@ -1,0 +1,64 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Moje Jazdy</div>
+
+<a href="/?mod=terminjazdy" class="green-btn-min">Ustal termin jazdy</a>
+<a href="/?mod=wykupjazde" class="green-btn-min">Wykup dodatkową jazdę</a>
+
+{if $systemData.get.msg == 'w_ustalonoJazde'}
+<div class="divArea">
+  Dodano termin jazdy szkolenowej
+</div>
+{elseif $systemData.get.msg == 'w_wykupionoJazde'}
+<div class="divArea">
+  Wykupiono dodatkową jazdę
+</div>
+{/if}
+
+{if !empty($applicationData.myDrivingList)}
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Data</td>
+    <td>Godz. rozpoczęcia</td>
+    <td>Godz. zakończenia</td>
+    <td>Instruktor</td>
+    <td>Samochód</td>
+    <td>Status</td>
+    <td></td>
+    <td></td>
+  </tr>
+  {foreach $applicationData.myDrivingList as $row}
+  <tr>
+    <td></td>
+    <td>{$row.data}</td>
+    <td>{$row.godzinaRozpoczecia}</td>
+    <td>{$row.godzinaZakonczenia}</td>
+    <td>{$row.imieI} {$row.nazwiskoI}</td>
+    <td>{$row.samochod}</td>
+    {if $row.status == 0}
+      <td>czeka na potwierdzenia</td>
+    {elseif $row.status == 1}
+      <td>potwierdzona</td>
+    {/if}
+    <td>
+      {if $row.buy == 1}
+      płatna
+      {/if}
+    </td>
+    <td>
+      {if $row.buy == 1}
+        <a href="/?mod=mojeplatnosci" class="green-btn-min">Opłać</a>
+      {/if}
+    </td>
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Nie jesteś zapisany na żaden kurs.
+{/if}
+
+
+{include file="layout/footer.html"}
+

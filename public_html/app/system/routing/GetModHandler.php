@@ -23,18 +23,44 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->registerView();
         break;
+      case 'wyloguj':
+        parent::controller('Users');
+        $this->controller = new UsersController();
+        $this->controller->logout();
+        break;
 
       case 'kursy':
-        parent::controller('Kursy');
-        $this->controller = new KursyController();
-        $this->controller->kursyView();
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
+        $this->controller->coursesView();
+        break;
+      case 'mojekursy':
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
+        $this->controller->myCoursesView();
         break;
       case 'egzaminy':
-        parent::controller('Egzaminy');
-        $this->controller = new EgzaminyController();
-        $this->controller->egzaminyView();
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->examsView();
         break;
-        
+      case 'mojeegzaminy':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->myExamsView();
+        break;
+
+      case 'mojeplatnosci':
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
+        $this->controller->myPaymentsView();
+        break;
+      case 'mojeraty':
+        parent::controller('Payments');
+        $this->controller = new PaymentsController();
+        $this->controller->mojeRatyView();
+        break;
+
       case 'kursanci':
         parent::controller('Users');
         $this->controller = new UsersController();
@@ -45,6 +71,39 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->instruktorzyView();
         break;
+
+
+      case 'mojejazdy':
+        parent::controller('Driving');
+        $this->controller = new DrivingController();
+        $this->controller->myDrivingView();
+        break;
+
+      case 'terminjazdy':
+        parent::controller('Driving');
+        $this->controller = new DrivingController();
+        $this->controller->chooseDrivingDate();
+        break;
+      
+      case 'zarzadzajUzytkownikami':
+        parent::controller('Users');
+        $this->controller = new UsersController();
+        $this->controller->setUserSettingsView();
+        break;
+      case 'edytujUzytkownika':
+        parent::controller('Users');
+        $this->controller = new UsersController();
+        $this->controller->getUserEditView();
+        break;
+
+      case 'wykupjazde':
+        parent::controller('Driving');
+        $this->controller = new DrivingController();
+        $this->controller->buyDrivingDate();
+        break;
+
+        
+
       default:
         header('location: /');
         die();

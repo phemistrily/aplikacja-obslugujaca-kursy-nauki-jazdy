@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 29 Gru 2019, 18:20
+-- Czas generowania: 31 Gru 2019, 14:47
 -- Wersja serwera: 10.4.8-MariaDB
 -- Wersja PHP: 7.3.10
 
@@ -124,7 +124,9 @@ CREATE TABLE `jazdaszkoleniowa` (
   `godzinaZakonczenia` time NOT NULL,
   `idKursant` int(10) UNSIGNED NOT NULL,
   `idSamochod` int(10) UNSIGNED NOT NULL,
-  `idInstruktor` int(10) UNSIGNED NOT NULL
+  `idInstruktor` int(10) UNSIGNED NOT NULL,
+  `status` tinyint(3) UNSIGNED NOT NULL,
+  `buy` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -245,8 +247,17 @@ CREATE TABLE `kursantkursprawajazdy` (
   `idKursant` int(10) UNSIGNED NOT NULL,
   `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL,
   `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `idInstruktor` int(10) UNSIGNED NOT NULL,
+  `idSamochod` int(10) UNSIGNED NOT NULL,
   `rezygnacja` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `kursantkursprawajazdy`
+--
+
+INSERT INTO `kursantkursprawajazdy` (`idKursantKursPrawaJazdy`, `idKursant`, `idKursPrawaJazdy`, `createdDate`, `idInstruktor`, `idSamochod`, `rezygnacja`) VALUES
+(34, 8, 1, '2019-12-31 14:31:29', 4, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -330,6 +341,38 @@ CREATE TABLE `platnosc` (
   `idJazdaSzkoleniowa` int(11) DEFAULT NULL,
   `rezygnacja` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `platnosc`
+--
+
+INSERT INTO `platnosc` (`idPlatnosc`, `idKursant`, `kwota`, `dataWplaty`, `terminPlatnosci`, `raty`, `idKursPrawaJazdy`, `idEgzamin`, `idJazdaSzkoleniowa`, `rezygnacja`) VALUES
+(22, 8, 1200, '2019-12-31', '2020-02-11', 1, 1, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `raty`
+--
+
+CREATE TABLE `raty` (
+  `idRaty` int(10) UNSIGNED NOT NULL,
+  `idPlatnosc` int(10) UNSIGNED NOT NULL,
+  `kwota` smallint(5) UNSIGNED NOT NULL,
+  `dataWplaty` date DEFAULT NULL,
+  `terminPlatnosci` date NOT NULL,
+  `idKursant` int(10) UNSIGNED NOT NULL,
+  `rezygnacja` tinyint(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `raty`
+--
+
+INSERT INTO `raty` (`idRaty`, `idPlatnosc`, `kwota`, `dataWplaty`, `terminPlatnosci`, `idKursant`, `rezygnacja`) VALUES
+(55, 22, 400, '2019-12-31', '2020-01-22', 8, 0),
+(56, 22, 400, '2019-12-31', '2020-02-01', 8, 0),
+(57, 22, 400, '2019-12-31', '2020-02-11', 8, 0);
 
 -- --------------------------------------------------------
 
@@ -481,6 +524,12 @@ ALTER TABLE `platnosc`
   ADD PRIMARY KEY (`idPlatnosc`);
 
 --
+-- Indeksy dla tabeli `raty`
+--
+ALTER TABLE `raty`
+  ADD PRIMARY KEY (`idRaty`);
+
+--
 -- Indeksy dla tabeli `samochod`
 --
 ALTER TABLE `samochod`
@@ -530,7 +579,7 @@ ALTER TABLE `instruktorkategoriauprawnien`
 -- AUTO_INCREMENT dla tabeli `jazdaszkoleniowa`
 --
 ALTER TABLE `jazdaszkoleniowa`
-  MODIFY `idJazdaSzkoleniowa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idJazdaSzkoleniowa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT dla tabeli `kategoria`
@@ -560,7 +609,7 @@ ALTER TABLE `kursantegzamin`
 -- AUTO_INCREMENT dla tabeli `kursantkursprawajazdy`
 --
 ALTER TABLE `kursantkursprawajazdy`
-  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT dla tabeli `kursprawajazdy`
@@ -584,7 +633,13 @@ ALTER TABLE `licencjaegzaminatorkategoriauprawnien`
 -- AUTO_INCREMENT dla tabeli `platnosc`
 --
 ALTER TABLE `platnosc`
-  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT dla tabeli `raty`
+--
+ALTER TABLE `raty`
+  MODIFY `idRaty` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT dla tabeli `samochod`
@@ -596,10 +651,5 @@ ALTER TABLE `samochod`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-<<<<<<< HEAD
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-COMMIT;
-=======
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
->>>>>>> 93dc8aa8c9956064db1cd9f80da2d0979ac8742b

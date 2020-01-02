@@ -13,8 +13,7 @@ class UsersController extends BaseController
   public function loginView(){
     parent::$applicationData['headTitle'] = 'MORD | Logowanie';
 
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'logowanie';
+    $this->setTemplate('logowanie');
     
   }
 
@@ -23,16 +22,18 @@ class UsersController extends BaseController
   {
     parent::$applicationData['headTitle'] = 'MORD | Rejestracja';
 
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'rejestracja';
+    $this->setTemplate('rejestracja');
   }
 
 
   public function loginUser($post)
   {
-    $user = $this->users->loginUser($post['email'], $post['password']);
+    $user = $this->users->loginUser($post);
     if($user)
     {
+      $_SESSION['userId'] = $user[0]['id'];
+      $_SESSION['userName'] = ucfirst($user[0]['imie']).' '.ucfirst($user[0]['nazwisko']);
+      $_SESSION['typKonta'] = $user[0]['typKonta'];
       parent::redirect('/?mod=dashboard&msg=s_loggedIn');
     }
     else
@@ -41,9 +42,25 @@ class UsersController extends BaseController
     }
   }
 
-  public function registerUser()
+  public function logout()
   {
+    unset($_SESSION['userId']);
+    unset($_SESSION['userName']);
+    unset($_SESSION['typKonta']);
+    parent::redirect('/');
+  }
 
+  public function registerUser($post)
+  {
+    $user = $this->users->registerUser($post);
+    if($user)
+    {
+      parent::redirect('/?mod=logowanie&msg=s_register');
+    }
+    else
+    {
+      parent::redirect('/?mod=rejestracja&msg=w_userExist');
+    }
   }
 
   public function instruktorzyView(){
@@ -51,8 +68,7 @@ class UsersController extends BaseController
 
     parent::$applicationData['instruktorList'] = $this->users->getInstruktorList();
 
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'instruktorzy';
+    $this->setTemplate('instruktorzy');
   }
 
   public function kursanciView(){
@@ -60,7 +76,46 @@ class UsersController extends BaseController
 
     parent::$applicationData['kursantList'] = $this->users->getKursantList();
 
+    $this->setTemplate('kursanci');
+  }
+
+  public function setUserSettingsView()
+  {
+    parent::$applicationData['headTitle'] = 'MORD | Zarządzaj użytkownikami';
+    if($_SESSION['typKonta'] == 'admin')
+    {
+      parent::$applicationData['userList'] = $this->users->getUsers();
+      $this->setTemplate('zarzadzanieUzytkownikami');
+    }
+    else
+    {
+      $this->setTemplate('youShallNotPass');
+    }
+  }
+
+  public function getUserEditView()
+  {
+    if($_SESSION['typKonta'] == 'admin')
+    {
+      parent::$applicationData['userData'] = $this->users->getUser($_GET['id']);
+      parent::$applicationData['headTitle'] = 'MORD | Edytuj użytkownika ' . parent::$applicationData['userData'][0]['email'];
+      $this->setTemplate('edytujUzytkownika');
+    }
+    else
+    {
+      $this->setTemplate('youShallNotPass');
+    }
+  }
+
+  public function editUser($post)
+  {
+    var_dump($post);
+    die();
+  }
+
+  private function setTemplate($templateName)
+  {
     ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'kursanci';
+    ModuleController::$template = $templateName;
   }
 }
