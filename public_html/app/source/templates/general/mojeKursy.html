@@ -22,9 +22,9 @@
     <td></td>
     <td></td>
   </tr>
-  {foreach $applicationData.myCoursesList as $row}
+  {foreach from=$applicationData.myCoursesList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.kategoria}</td>
     <td>{$row.cena} zł</td>
     <td>{$row.dataRozpoczecia}</td>

@@ -17,9 +17,9 @@
     <td>Instruktor prowadzący</td>
     <td></td>
   </tr>
-  {foreach $applicationData.coursesList as $row}
+  {foreach from=$applicationData.coursesList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.kategoria}</td>
     <td>{$row.cena} zł</td>
     <td>{$row.dataRozpoczecia}</td>

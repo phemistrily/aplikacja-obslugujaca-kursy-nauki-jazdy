@@ -49,6 +49,16 @@ class GetModHandler extends Handler
         $this->controller = new ExamsController();
         $this->controller->myExamsView();
         break;
+      case 'egzaminteoretyczny':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->chooseTheoryExamsView();
+        break;
+      case 'egzaminpraktyczny':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->choosePraticalExamsView();
+        break;
 
       case 'mojeplatnosci':
         parent::controller('Payments');

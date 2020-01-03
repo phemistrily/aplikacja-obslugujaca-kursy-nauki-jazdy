@@ -3,6 +3,7 @@
 
 <div class="headline">Egzaminy</div>
 
+{if !empty($applicationData.examsList)}
 <table class="tab">
   <tr class="rowTitle">
     <td>Lp.</td>
@@ -13,9 +14,9 @@
     <td>Data</td>
     <td>Wynik</td>
   </tr>
-  {foreach $applicationData.examsList as $row}
+  {foreach from=$applicationData.examsList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.typ}</td>
     <td>{$row.kategoria}</td>
     <td>{$row.imieK} {$row.nazwiskoK}</td>
@@ -25,7 +26,9 @@
   </tr>
   {/foreach}
 </table>
-
+{else}
+  Brak egzaminów
+{/if}
 
 
 {include file="layout/footer.html"}

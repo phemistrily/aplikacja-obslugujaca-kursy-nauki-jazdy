@@ -1,0 +1,35 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Ustal egzamin teoretyczny</div>
+
+
+{if !empty($applicationData.theoryExamsList)}
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Typ</td>
+    <td>Data i godzina</td>
+    <td></td>
+  </tr>
+  {foreach from=$applicationData.theoryExamsList key=key item=row}
+  <tr>
+    <td>{$key+1}</td>
+    <td>{$row.typ}</td>
+    <td>{$row.data}</td>
+    <td>
+      <form action="/" method="POST">
+        <input type="hidden" name="egzaminId" value="{$row.idEgzamin}">
+        <button name="form" value="chooseTheoryExam" type="submit" class="green-btn-min">Wybierz</button>
+      </form>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Brak terminów do wyboru
+{/if}
+
+
+{include file="layout/footer.html"}
+
