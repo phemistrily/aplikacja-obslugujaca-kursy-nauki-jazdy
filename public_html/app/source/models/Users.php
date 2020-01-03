@@ -46,8 +46,6 @@ class Users
             return false;
         }
         foreach ($userData as $key => $value) {
-            var_dump($key);
-            var_dump($value);
             $toUpdate = '';
             switch ($key) {
                 case 'imie':
@@ -65,11 +63,11 @@ class Users
             }
             if ($toUpdate)
             {
-                $query = "UPDATE users SET $toUpdate = '$value'";
-                var_dump($query);
-                //Sql::$sql1->run($query);
+                $query = "UPDATE users SET $toUpdate = '$value' WHERE id = " . $userData['id'];
+                Sql::$sql1->run($query);
             }
         }
+        return $userData['id'];
     }
 
     public function loginUser($loginData)

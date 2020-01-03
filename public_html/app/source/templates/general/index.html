@@ -1,7 +1,20 @@
-{include file="layout/header.html"}
-
-
-strona startowa index.html
-
-
-{include file="layout/footer.html"}
+{include file="layout/header.html"} {if $systemData.get.msg eq
+'w_somethingHappened'}
+<div class="divArea">
+  <div class="formErr">
+    Coś poszło nie tak!
+  </div>
+</div>
+{/if} {if $systemData.session.typKonta eq 'admin'} Witaj w panelu
+administratora! <br />
+<div class="dashboardBlock">
+  <a href ="?mod=zarzadzajUzytkownikami" class="dashboardTab">
+      <span class="dashboardContent">Edytuj Użytkowników</span>
+  </a>
+  <a href ="?mod=sprawdzPojazdy" class="dashboardTab">
+    <span class="dashboardContent">Sprawdź pojazdy</span>
+  </a>
+</div>
+<div class="clear"></div>
+{/if} strona startowa index.html {include
+file="layout/footer.html"}

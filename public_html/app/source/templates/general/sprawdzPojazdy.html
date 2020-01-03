@@ -1,0 +1,30 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Pojazdy</div>
+
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Typ</td>
+    <td>Kategoria</td>
+    <td>Egzaminator</td>
+    <td>Data</td>
+    <td>Wynik</td>
+  </tr>
+  {foreach $applicationData.cars as $key=>$row}
+  <tr>
+    <td>{$key+1}</td>
+    <td>{$row.marka}</td>
+    <td>{$row.model}</td>
+    <td>{$row.rokProdukcji}</td>
+    <td>{$row.numerRejestracyjny}</td>
+    <td>{$row.vin}</td>
+  </tr>
+  {/foreach}
+</table>
+  
+  
+
+{include file="layout/footer.html"}
+

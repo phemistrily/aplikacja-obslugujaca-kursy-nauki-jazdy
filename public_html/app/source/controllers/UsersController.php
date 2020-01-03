@@ -110,7 +110,14 @@ class UsersController extends BaseController
   public function editUser($post)
   {
     $user = $this->users->editUser($post);
-    var_dump($post);
+    if($user)
+    {
+      parent::redirect('/?mod=edytujUzytkownika&id='.$user.'&msg=s_editUser');
+    }
+    else
+    {
+      parent::redirect('/?msg=w_somethingHappened');
+    }
     die();
   }
 

@@ -237,3 +237,32 @@ a.green-btn-min:hover {
     font-display: swap;
     src: url('./fonts/OpenSans-ExtraBold.ttf');
 }
+
+.dashboardBlock {
+    margin: 20px 0;
+    float: left;
+    width: 100%;
+}
+
+.dashboardTab {
+    width: 25%;
+    height: 150px;
+    margin: 10px 0;
+    font-size: 1em;
+    color: black;
+    float: left;
+}
+.dashboardContent {
+    background: rgba(134,177,64,0.4);
+    border: 1px solid black;
+    margin: 0 20px;
+    border-radius: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.clear {
+    clear: both;
+}

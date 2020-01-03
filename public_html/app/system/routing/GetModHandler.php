@@ -95,7 +95,11 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->getUserEditView();
         break;
-
+      case 'sprawdzPojazdy':
+        parent::controller('Cars');
+        $this->controller = new CarsController();
+        $this->controller->getCarsView();
+        break;
       case 'wykupjazde':
         parent::controller('Driving');
         $this->controller = new DrivingController();

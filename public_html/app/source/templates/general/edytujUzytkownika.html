@@ -1,5 +1,10 @@
 {include file="layout/header.html"}
+{if $systemData.get.msg eq 's_editUser'}
+<div class="divArea">
+  Udało Ci się zmienić dane użytkownika!
+</div>
 
+{/if}
 
 <div class="headline">Użytkownik {$applicationData.userData.0.email}</div>
 

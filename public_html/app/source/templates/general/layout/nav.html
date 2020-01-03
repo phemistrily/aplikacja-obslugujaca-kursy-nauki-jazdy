@@ -1,6 +1,7 @@
 <nav id="nav">
     <div class="container">
         <ul class="navMenu">
+            <li><a href="/">Strona główna</a></li>
             <li><a href="?mod=kursy">Kursy</a></li>
             
             {if isset($systemData.session.userId) && $systemData.session.userId != ''}
@@ -9,6 +10,7 @@
                     <li><a href="?mod=instruktorzy">Instruktorzy</a></li>
                     <li><a href="?mod=egzaminy">Egzaminy</a></li>
                     <li><a href="?mod=zarzadzajUzytkownikami">Zarządzaj użytkownikami</a></li>
+                    <li><a href="?mod=sprawdzPojazdy">Sprawdź pojazdy</a></li>
                 {elseif $systemData.session.typKonta == 'instruktor'}
                     <li><a href="?mod=kursanci">Kursanci</a></li>
                     <li><a href="?mod=">Egzaminy</a></li>
