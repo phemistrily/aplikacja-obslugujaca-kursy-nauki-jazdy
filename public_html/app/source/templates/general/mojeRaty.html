@@ -19,9 +19,9 @@
     <td>Data wpłaty</td>
     <td></td>
   </tr>
-  {foreach $applicationData.mojeRatyList as $row}
+  {foreach from=$applicationData.mojeRatyList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.kwota} zł</td>
     <td>{$row.terminPlatnosci}</td>
 

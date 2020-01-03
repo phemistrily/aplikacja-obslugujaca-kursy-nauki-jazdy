@@ -14,9 +14,9 @@
       <td>Numer telefonu</td>
       <td>E-mail</td>
     </tr>
-    {foreach $applicationData.kursantList as $row}
+    {foreach from=$applicationData.kursantList key=key item=row}
     <tr>
-      <td></td>
+      <td>{$key+1}</td>
       <td>{$row.imie}</td>
       <td>{$row.nazwisko}</td>
       <td>{$row.dataUrodzenia}</td>

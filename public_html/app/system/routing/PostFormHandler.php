@@ -84,6 +84,20 @@ class PostFormHandler extends Handler
         $this->controller->paymentPartCourse($_POST);
         die();
         break;
+
+      case 'chooseTheoryExam':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->chooseTheoryExam($_POST);
+        die();
+        break;
+
+      case 'choosePracticalExam':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->choosePracticalExam($_POST);
+        die();
+        break;
         
       default:
         # code...

@@ -8,7 +8,15 @@
 </div>
 {elseif $systemData.get.msg == 'w_oplaconoKurs'}
 <div class="divArea">
-    Opłacono kurs
+    Opłacono
+</div>
+{elseif $systemData.get.msg == 'w_oplacEgzaminTeoretyczny'}
+<div class="divArea">
+    Opłać egzamin teoretyczny
+</div>
+{elseif $systemData.get.msg == 'w_oplacEgzaminPraktyczny'}
+<div class="divArea">
+  Opłać egzamin praktyczny
 </div>
 {/if}
 
@@ -25,9 +33,9 @@
     <td></td>
     <td></td>
   </tr>
-  {foreach $applicationData.myPaymentsList as $row}
+  {foreach from=$applicationData.myPaymentsList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.kwota} zł</td>
     <td>{$row.terminPlatnosci}</td>
     {if $row.raty == 1}

@@ -3,6 +3,36 @@
 
 <div class="headline">Moje egzaminy</div>
 
+<a href="/?mod=egzaminteoretyczny" class="green-btn-min">Ustal egzamin teoretyczny</a>
+<a href="/?mod=egzaminpraktyczny" class="green-btn-min">Ustal egzamin praktyczny</a>
+<br>
+<br>
+<br>
+
+{if !empty($applicationData.myPlannedExamsList)}
+<div class="headline">Zaplanowane egzaminy</div>
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Typ</td>
+    <td>Data</td>
+  </tr>
+  {foreach from=$applicationData.myPlannedExamsList key=key item=row}
+  <tr>
+    <td>{$key+1}</td>
+    <td>{$row.typ}</td>
+    <td>{$row.data}</td>
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Brak egzaminów
+{/if}
+<br>
+
+
+<div class="headline">Historia egzaminów</div>
+{if !empty($applicationData.myExamsList)}
 <table class="tab">
   <tr class="rowTitle">
     <td>Lp.</td>
@@ -12,9 +42,9 @@
     <td>Data</td>
     <td>Wynik</td>
   </tr>
-  {foreach $applicationData.myExamsList as $row}
+  {foreach from=$applicationData.myExamsList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.typ}</td>
     <td>{$row.kategoria}</td>
     <td>{$row.imieI} {$row.nazwiskoI}</td>
@@ -23,7 +53,9 @@
   </tr>
   {/foreach}
 </table>
-
+{else}
+  Brak egzaminów
+{/if}
 
 
 {include file="layout/footer.html"}

@@ -29,9 +29,9 @@
     <td></td>
     <td></td>
   </tr>
-  {foreach $applicationData.myDrivingList as $row}
+  {foreach from=$applicationData.myDrivingList key=key item=row}
   <tr>
-    <td></td>
+    <td>{$key+1}</td>
     <td>{$row.data}</td>
     <td>{$row.godzinaRozpoczecia}</td>
     <td>{$row.godzinaZakonczenia}</td>
