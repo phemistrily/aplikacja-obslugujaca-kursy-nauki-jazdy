@@ -20,7 +20,7 @@ class Courses
             'kursantId' => $_SESSION['userId']
         ];
         $query = "SELECT kkpj.*, kkpj.idInstruktor as potrzebujeTegoRobcieToCzytelniej, kpj.*, k.nazwa as kategoria, CONCAT(u.imie,' ',u.nazwisko) AS instruktorKursu, CONCAT(uj.imie,' ',uj.nazwisko) AS instruktorJazd FROM kursantkursprawajazdy kkpj INNER JOIN kursprawajazdy kpj ON kpj.idKursPrawaJazdy = kkpj.idKursPrawaJazdy INNER JOIN kategoria k ON k.idKategoria = kpj.idKategoria INNER JOIN users u ON u.id = kpj.idInstruktor INNER JOIN users uj ON uj.id = kkpj.idInstruktor WHERE kkpj.idKursant = :kursantId AND kkpj.rezygnacja != 1";
-        Sql::$sql1->run($query, $params);
+        Sql::$sql1->run($query, $params);   
         return Sql::$sql1->toArray();
     }
 
@@ -34,6 +34,7 @@ class Courses
             $toUpdate = '';
             switch ($key) {
                 case 'idInstruktor':
+                case 'opinia':
                     $toUpdate = $key;
                     break;
                 

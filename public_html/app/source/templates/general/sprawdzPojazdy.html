@@ -22,7 +22,18 @@
     <td>{$row.numerRejestracyjny}</td>
     <td>{$row.vin}</td>
     <td>{$row.status}</td>
+    {if $systemData.session.typKonta eq admin}
     <td><a class="buttonedit" href="?mod=edytujPojazd&id={$row.idSamochod}">Edytuj</a></td>
+    {else}
+    <td>
+      <form action="/" method="POST">
+        <button name="form" value="sendCarToService" type="submit" class="green-btn-min">Wyślij pojazd do serwisu</button>
+      </form>
+    </td>
+    {else}
+    <td></td>
+    {/if}
+    
   </tr>
   {/foreach}
 </table>
