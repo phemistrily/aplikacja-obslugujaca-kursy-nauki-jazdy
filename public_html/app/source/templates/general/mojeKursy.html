@@ -7,6 +7,11 @@
     Zrezygnowano z kursu
 </div>
 {/if}
+{if $systemData.get.msg == 's_instruktorChanged'}
+<div class="divArea">
+    Zmieniono instruktora
+</div>
+{/if}
 {if !empty($applicationData.myCoursesList)}
 <table class="tab">
   <tr class="rowTitle">
@@ -40,6 +45,13 @@
         <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
         <button name="form" value="oplacKurs" type="submit" class="green-btn-min">Opłać</button>
       </form>-->
+    </td>
+    <td>
+      <form action="/" method="POST">
+        <input type="hidden" name="kursId" value="{$row.idKursantKursPrawaJazdy}">
+        <input type="hidden" name="instruktorId" value="{$row.potrzebujeTegoRobcieToCzytelniej}">
+        <button name="form" value="zmienInstruktora" type="submit" class="green-btn-min">Poproś o zmianę instruktora jazd</button>
+      </form>
     </td>
     <td>
       <form action="/" method="POST">

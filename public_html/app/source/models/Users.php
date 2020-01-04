@@ -146,6 +146,13 @@ class Users
         Sql::$sql1->run($query);
         return Sql::$sql1->toArray();
     }
+
+    public function getInstructorExcept($id)
+    {
+        $query = "SELECT * FROM users WHERE typKonta = 'instruktor' AND id != $id";
+        Sql::$sql1->run($query);
+        return Sql::$sql1->toArray();
+    }
 }
 
 ?>
