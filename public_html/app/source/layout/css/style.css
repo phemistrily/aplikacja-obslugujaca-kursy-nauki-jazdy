@@ -287,6 +287,6 @@ a.green-btn-min:hover {
     background-color: #4CAF50;
 }
 #negativeresult {
-    color:white;
+    color:red;
     background-color: rgb(143, 38, 24);
 }
