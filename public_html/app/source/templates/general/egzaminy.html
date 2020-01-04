@@ -22,14 +22,24 @@
     <td>{$row.imieK} {$row.nazwiskoK}</td>
     <td>{$row.imieI} {$row.nazwiskoI}</td>
     <td>{$row.data}</td>
-    <td>{$row.wynik}</td>
+    <td>{if
+      $row.wynik == 'negatywny'
+      }
+    <td id="negativeresult">{$row.wynik}</td>
+    {else}<td id="positiveresult">{$row.wynik}</td>
+
+
+    {/if}
+
+
+
+    </td>
   </tr>
   {/foreach}
 </table>
 {else}
-  Brak egzaminów
+Brak egzaminów
 {/if}
 
 
 {include file="layout/footer.html"}
-

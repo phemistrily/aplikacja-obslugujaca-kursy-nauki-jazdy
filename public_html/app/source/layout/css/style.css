@@ -252,6 +252,9 @@ a.green-btn-min:hover {
     color: white;
     float: left;
 }
+.dashboardTab:hover{
+    font-size:105%;
+}
 .dashboardContent {
     background: #86b140;
     border: 1px solid black;
@@ -265,4 +268,25 @@ a.green-btn-min:hover {
 }
 .clear {
     clear: both;
+}
+.buttonedit{
+    background-color: #86b140; /* jak tło */
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+}
+.buttonedit:hover{
+    opacity: 90%;
+}
+#positiveresult {
+    color:white;
+    background-color: #4CAF50;
+}
+#negativeresult {
+    color:white;
+    background-color: rgb(143, 38, 24);
 }
