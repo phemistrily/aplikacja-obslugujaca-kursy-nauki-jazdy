@@ -6,7 +6,9 @@ class CoursesController extends BaseController
   public function __construct()
   {
     parent::model('Courses');
+    parent::model('Users');
     $this->courses = new Courses();
+    $this->users = new Users();
   }
 
 
@@ -14,7 +16,7 @@ class CoursesController extends BaseController
     parent::$applicationData['headTitle'] = 'MORD | Kursy';
 
     parent::$applicationData['coursesList'] = $this->courses->getCoursesList();
-
+    
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'kursy';
     
@@ -24,10 +26,23 @@ class CoursesController extends BaseController
     parent::$applicationData['headTitle'] = 'MORD | Moje kursy';
 
     parent::$applicationData['myCoursesList'] = $this->courses->getMyCoursesList();
-
+    
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'mojeKursy';
     
+  }
+
+  public function changeInstructorForCourse($post)
+  {
+    $instructorList = $this->users->getInstructorExcept($post['instruktorId']);
+    $key = rand(0,count($instructorList)-1);
+    $parms = [
+      'id' => $post['kursId'],
+      'idInstruktor' => $instructorList[$key]['id']
+    ];
+    $this->courses->editCourseUser($parms);
+    parent::redirect('?mod=mojekursy&msg=s_instruktorChanged');
+    die();
   }
 
 
