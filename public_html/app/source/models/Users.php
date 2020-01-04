@@ -54,6 +54,7 @@ class Users
                 case 'pesel':
                 case 'adresZamieszkania':
                 case 'numerTelefonu':
+                case 'typKonta':
                     $toUpdate = $key;
                     break;
                 

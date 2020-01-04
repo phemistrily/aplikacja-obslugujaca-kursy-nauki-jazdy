@@ -23,7 +23,7 @@
     <label>Numer telefonu</label>
     <input type="text" name="numerTelefonu" value="{$row.numerTelefonu}"/>
     <label>Typ konta</label>
-    <select>
+    <select name="typKonta">
       <option value="admin"{if $row.typKonta eq admin}selected{/if}>Administrator</option>
       <option value="instruktor"{if $row.typKonta eq instruktor}selected{/if}>Instruktor</option>
       <option value="kursant" {if $row.typKonta eq kursant}selected{/if}>Kursant</option>

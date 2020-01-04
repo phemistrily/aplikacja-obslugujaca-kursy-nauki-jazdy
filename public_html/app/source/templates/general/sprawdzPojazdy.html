@@ -1,6 +1,5 @@
 {include file="layout/header.html"}
 
-
 <div class="headline">Pojazdy</div>
 
 <table class="tab">
@@ -11,6 +10,8 @@
     <td>Egzaminator</td>
     <td>Data</td>
     <td>Wynik</td>
+    <td>Status</td>
+    <td>Edytuj</td>
   </tr>
   {foreach $applicationData.cars as $key=>$row}
   <tr>
@@ -20,11 +21,10 @@
     <td>{$row.rokProdukcji}</td>
     <td>{$row.numerRejestracyjny}</td>
     <td>{$row.vin}</td>
+    <td>{$row.status}</td>
+    <td><a href="?mod=edytujPojazd&id={$row.idSamochod}">Edytuj</a></td>
   </tr>
   {/foreach}
 </table>
-  
-  
 
 {include file="layout/footer.html"}
-

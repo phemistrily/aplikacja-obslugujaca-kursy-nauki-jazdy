@@ -38,6 +38,12 @@ class PostFormHandler extends Handler
         $this->controller->editUser($_POST);
         die();
       break;
+      case 'editCar':
+        parent::controller('Cars');
+        $this->controller = new CarsController();
+        $this->controller->editCar($_POST);
+        die();
+        break;
       case 'zapiszNaKurs':
         parent::controller('Courses');
         $this->controller = new CoursesController();
