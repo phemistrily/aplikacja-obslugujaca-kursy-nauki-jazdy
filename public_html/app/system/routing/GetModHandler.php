@@ -125,6 +125,11 @@ class GetModHandler extends Handler
         $this->controller = new DrivingController();
         $this->controller->buyDrivingDate();
         break;
+      case 'opiniaKurs':
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
+        $this->controller->setOpinionView();
+        break;
 
         
 

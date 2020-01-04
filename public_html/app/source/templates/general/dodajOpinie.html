@@ -1,0 +1,23 @@
+{include file="layout/header.html"} {if $systemData.get.msg eq 's_editCar'}
+<div class="divArea">
+  Udało Ci się zmienić dane pojazdu!
+</div>
+
+{/if}
+
+<div class="headline">Dodaj opinię na temat kursu</div>
+
+<form method="POST" action="/">
+  <label>Opinia na temat kursu</label>
+  <textarea
+    name="opinia"
+    placeholder="Dodaj swoją opinię"
+    cols="30"
+    rows="10"
+  ></textarea>
+  <input type="hidden" name="id" value="{$systemData.get.id}" />
+  <input type="hidden" name="form" value="addOpinionCourse" />
+  <input type="submit" value="Dodaj opinię" />
+</form>
+
+{include file="layout/footer.html"}

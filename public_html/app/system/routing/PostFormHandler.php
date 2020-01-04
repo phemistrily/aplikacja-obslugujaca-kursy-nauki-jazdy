@@ -110,6 +110,12 @@ class PostFormHandler extends Handler
         $this->controller->changeInstructorForCourse($_POST);
         die();
         break;
+      case 'addOpinionCourse':
+        parent::controller('Courses');
+        $this->controller = new CoursesController();
+        $this->controller->addOpinionCourse($_POST);
+        die();
+        break;
       default:
         # code...
         break;

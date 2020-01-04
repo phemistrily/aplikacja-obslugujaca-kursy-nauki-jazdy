@@ -676,3 +676,5 @@ COMMIT;
 ALTER TABLE `mord`.`samochod` 
 ADD COLUMN `status` VARCHAR(50) NOT NULL DEFAULT 'sprawny' AFTER `vin`;
 
+ALTER TABLE `mord`.`kursantkursprawajazdy` 
+ADD COLUMN `opinia` TEXT NULL AFTER `rezygnacja`;

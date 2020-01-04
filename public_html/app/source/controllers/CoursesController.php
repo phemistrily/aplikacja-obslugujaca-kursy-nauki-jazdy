@@ -76,6 +76,19 @@ class CoursesController extends BaseController
     parent::redirect('/?mod=mojekursy&msg=w_rezygnacjaKurs');
   }
 
+  public function setOpinionView()
+  {
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'dodajOpinie';
+  }
+
+  public function addOpinionCourse($post)
+  {
+    var_dump($post);
+    $this->courses->editCourseUser($post);
+    parent::redirect('?mod=mojekursy&msg=s_addOpinion');
+  }
+
   
 
 }
