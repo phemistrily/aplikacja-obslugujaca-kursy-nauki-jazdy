@@ -28,7 +28,11 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->logout();
         break;
-
+      case 'oOsrodku':
+        parent::controller('Dashboard');
+        $this->controller = new DashboardController;
+        $this->controller->getOsrodekView();
+        break;
       case 'kursy':
         parent::controller('Courses');
         $this->controller = new CoursesController();
@@ -109,6 +113,7 @@ class GetModHandler extends Handler
         parent::controller('Cars');
         $this->controller = new CarsController();
         $this->controller->getCarsView();
+        
         break;
       case 'edytujPojazd':
         parent::controller('Cars');
