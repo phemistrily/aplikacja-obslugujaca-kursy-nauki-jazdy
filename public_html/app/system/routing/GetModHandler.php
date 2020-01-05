@@ -28,6 +28,11 @@ class GetModHandler extends Handler
         $this->controller = new UsersController();
         $this->controller->logout();
         break;
+        case 'Informacje':
+          parent::controller('Dashboard');
+          $this->controller = new DashboardController;
+          $this->controller->getInfoView();
+          break;
       case 'oOsrodku':
         parent::controller('Dashboard');
         $this->controller = new DashboardController;
