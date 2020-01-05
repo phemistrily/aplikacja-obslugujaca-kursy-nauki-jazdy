@@ -21,16 +21,6 @@ class CoursesController extends BaseController
     ModuleController::$template = 'kursy';
     
   }
-  public function getOsrodekView(){
-    parent::$applicationData['headTitle'] = 'MORD | O osrodku';
-
-    parent::$applicationData['oosrodkuList'] = $this->courses->getoOsrodkuList();
-    
-    ModuleController::$applicationData = parent::$applicationData;
-    ModuleController::$template = 'oOsrodku';
-    
-  }
-
   public function myCoursesView(){
     parent::$applicationData['headTitle'] = 'MORD | Moje kursy';
 

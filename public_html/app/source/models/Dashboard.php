@@ -12,6 +12,15 @@ class Dashboard
 
         Sql::$sql1->run($query);
         return Sql::$sql1->toArray();
+        
+    }
+    public function getInfoList()
+    {
+        $query = "SELECT * from users";
+
+        Sql::$sql1->run($query);
+        return Sql::$sql1->toArray();
+        
     }
 
 }

@@ -1,7 +1,7 @@
 <nav id="nav">
     <div class="container">
         <ul class="navMenu">
-            <li><a href="/">Strona główna</a></li>
+            <li><a href="?mod=stronaGlowna">Strona główna</a></li>
             <li><a href="?mod=kursy">Kursy</a></li>
             
             {if isset($systemData.session.userId) && $systemData.session.userId != ''}
@@ -21,8 +21,9 @@
                     <li><a href="?mod=mojeplatnosci">Moje płatności</a></li>
                 {/if}
             {else}
-                <li><a href="?mod=informacje">Informacje</a></li>
+                <li><a href="?mod=Informacje">Informacje</a></li>
                 <li><a href="?mod=oOsrodku">O ośrodku</a></li>
+                
             {/if}
             
             <li> <a href="?mod="></a></li>
