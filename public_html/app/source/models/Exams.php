@@ -25,6 +25,30 @@ class Exams
         return Sql::$sql1->toArray();
     }
 
+    public function getExamsForInstruktor($instruktorId)
+    {
+        $parms = [
+            'instruktorId' => $instruktorId
+        ];
+
+        $query = "SELECT e.*,
+        k.nazwa as kategoria,
+        ui.imie as imieI,
+        ui.nazwisko as nawziskoI,
+        ke.idKursant,
+        uk.imie as imieK,
+        uk.nazwisko as nazwiskoK,
+        IF(e.data > NOW(), 0, 1) as dataStart
+        FROM egzamin e 
+        INNER JOIN kategoria k ON k.idKategoria = e.idKategoria 
+        INNER JOIN users ui ON ui.id = e.idInstruktor 
+        INNER JOIN kursantegzamin ke ON ke.idEgzamin = e.idEgzamin 
+        INNER JOIN users uk ON uk.id = ke.idKursant WHERE ke.idEgzaminator = :instruktorId
+        ";
+
+        Sql::$sql1->run($query,$parms);
+        return Sql::$sql1->toArray();
+    }
 
     public function getMyPlannedExamsList()
     {
@@ -130,6 +154,28 @@ class Exams
         $query = "INSERT INTO platnosc (idKursant, kwota, terminPlatnosci, idEgzamin) VALUES(:kursantId, :kwota, :terminPlatnosci, :egzaminId)";
         Sql::$sql1->run($query, $params);
 
+        return true;
+    }
+
+    public function zaliczExam($examId)
+    {
+        $parms = [
+            'egzaminId' => $examId
+        ];
+        $query = "UPDATE egzamin SET wynik = 'pozytywny' WHERE idEgzamin = :egzaminId";
+        
+        Sql::$sql1->run($query, $parms);
+        return true;
+    }
+
+    public function nieZaliczExam($examId)
+    {
+        $parms = [
+            'egzaminId' => $examId
+        ];
+        $query = "UPDATE egzamin SET wynik = 'negatywny' WHERE idEgzamin = :egzaminId";
+        
+        Sql::$sql1->run($query, $parms);
         return true;
     }
 }

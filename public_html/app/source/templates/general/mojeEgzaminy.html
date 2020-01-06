@@ -1,8 +1,12 @@
 {include file="layout/header.html"}
 
-
+{if $systemData.get.msg eq 's_examStatusChanged'}
+<div class="divArea">
+  Zmieniono status egzaminu
+</div>
+{/if}
 <div class="headline">Moje egzaminy</div>
-
+{if $systemData.session.typKonta eq 'kursant'}
 <a href="/?mod=egzaminteoretyczny" class="green-btn-min">Ustal egzamin teoretyczny</a>
 <a href="/?mod=egzaminpraktyczny" class="green-btn-min">Ustal egzamin praktyczny</a>
 <br>
@@ -16,12 +20,14 @@
     <td>Lp.</td>
     <td>Typ</td>
     <td>Data</td>
+    <td>Wynik</td>
   </tr>
   {foreach from=$applicationData.myPlannedExamsList key=key item=row}
   <tr>
     <td>{$key+1}</td>
     <td>{$row.typ}</td>
     <td>{$row.data}</td>
+    <td>{$row.wynik}</td>
   </tr>
   {/foreach}
 </table>
@@ -56,7 +62,41 @@
 {else}
   Brak egzaminów
 {/if}
-
+{elseif $systemData.session.typKonta eq 'instruktor'}
+{if !empty($applicationData.myExamsList)}
+<div class="headline">Zaplanowane egzaminy</div>
+<table class="tab">
+  <tr class="rowTitle">
+    <td>Lp.</td>
+    <td>Typ</td>
+    <td>Data</td>
+    <td>Wynik</td>
+    <td>Edytuj</td>
+  </tr>
+  {foreach from=$applicationData.myExamsList key=key item=row}
+  <tr>
+    <td>{$key+1}</td>
+    <td>{$row.typ}</td>
+    <td>{$row.data}</td>
+    <td>{$row.wynik}</td>
+    <td>
+      <form action="/" method="POST">
+      {if $row.wynik eq '' and $row.dataStart eq 1}
+        <form action="/" method="POST">
+          <input type="hidden" name="egzaminId" value="{$row.idEgzamin}">
+          <button name="form" value="zaliczEgzamin" type="submit" class="green-btn-min">Zaliczone</button>
+          <button name="form" value="nieZaliczEgzamin" type="submit" class="green-btn-min">Nie zaliczone</button>
+      {/if}
+      </form>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+{else}
+  Brak egzaminów
+{/if}
+<br>
+{/if}
 
 {include file="layout/footer.html"}
 

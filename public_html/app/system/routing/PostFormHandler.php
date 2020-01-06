@@ -116,6 +116,18 @@ class PostFormHandler extends Handler
         $this->controller->addOpinionCourse($_POST);
         die();
         break;
+      case 'zaliczEgzamin':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->zaliczExam($_POST);
+        die();
+        break;
+      case 'nieZaliczEgzamin':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->nieZaliczExam($_POST);
+        die();
+        break;
       default:
         # code...
         break;

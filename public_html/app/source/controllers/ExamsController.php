@@ -21,11 +21,17 @@ class ExamsController extends BaseController
 
   public function myExamsView(){
     parent::$applicationData['headTitle'] = 'MORD | Moje egzaminy';
-
-    parent::$applicationData['myExamsList'] = $this->exams->getMyExamsList();
-    parent::$applicationData['myPlannedExamsList'] = $this->exams->getMyPlannedExamsList();
+    if($_SESSION['typKonta'] == 'kursant')
+    {
+      parent::$applicationData['myExamsList'] = $this->exams->getMyExamsList();
+      parent::$applicationData['myPlannedExamsList'] = $this->exams->getMyPlannedExamsList();
+    }
+    else if($_SESSION['typKonta'] == 'instruktor')
+    {
+      parent::$applicationData['myExamsList'] = $this->exams->getExamsForInstruktor($_SESSION['userId']);
+    }
+    
     //parent::$applicationData['myPracticalExamList'] = $this->exams->getMyPracticalExamList();
-
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'mojeEgzaminy';
   }
@@ -62,5 +68,31 @@ class ExamsController extends BaseController
     
     $result = $this->exams->choosePracticalExam($post);
     parent::redirect('/?mod=mojeplatnosci&msg=w_oplacEgzaminPraktyczny');
+  }
+
+  public function zaliczExam($post)
+  {
+    if($post['egzaminId'])
+    {
+      $this->exams->zaliczExam($post['egzaminId']);
+      parent::redirect('?mod=mojeegzaminy&msg=s_examStatusChanged');
+    }
+    else
+    {
+      parent::redirect('?msg=w_somethingHappened');
+    }
+  }
+
+  public function nieZaliczExam($post)
+  {
+    if($post['egzaminId'])
+    {
+      $this->exams->nieZaliczExam($post['egzaminId']);
+      parent::redirect('?mod=mojeegzaminy&msg=s_examStatusChanged');
+    }
+    else
+    {
+      parent::redirect('?msg=w_somethingHappened');
+    }
   }
 }
