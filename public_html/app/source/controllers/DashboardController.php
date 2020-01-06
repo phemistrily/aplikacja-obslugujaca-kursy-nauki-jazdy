@@ -11,7 +11,6 @@ class DashboardController extends BaseController
 
   public function getOsrodekView(){
     parent::$applicationData['headTitle'] = 'MORD | O osrodku';
-
     //var_dump(parent::$applicationData);
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'oOsrodku';
@@ -19,7 +18,6 @@ class DashboardController extends BaseController
   }
   public function getInfoView(){
     parent::$applicationData['headTitle'] = 'MORD | Informacje';
-
     //var_dump(parent::$applicationData);
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'Informacje';

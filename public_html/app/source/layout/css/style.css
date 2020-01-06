@@ -19,12 +19,6 @@ a {
 	max-width: 1200px;
 	margin: 0 auto;
 }
-
-
-
-
-
-
 #header {
     background-color: #86b140;
     color: #fff;
@@ -50,6 +44,10 @@ a {
     font-size: 30px;
     font-weight: 600;
 }
+.KDP_MORD{
+    max-width: 100%;
+  height: auto;
+}
 .logo_mord{
 
     display: block;
@@ -58,24 +56,20 @@ a {
     width: 30%;
     height: 30%;
 }
-
 #nav {
     padding: 10px 0px;
     background-color: #203265;
     color: #fff;
 }
-
 #main {
     padding: 20px 0px;
     min-height: 300px;
 }
-
 #footer {
     background-color: #232323;
     color: #fff;
     padding: 20px 0px;
 }
-
 .headline {
     padding: 5px 10px 10px;
     border-bottom: 1px solid #e3e3e3;
@@ -84,8 +78,6 @@ a {
     font-weight: 500;
     color: #777;
 }
-
-
 .navMenu > li {
     display: inline-block;
     margin: 0px 5px;
@@ -99,7 +91,6 @@ a {
 .navMenu > li > a:hover {
     color: #A9E051;
 }
-
 /*-------------------------------------------------------*/
 .divArea {
     margin: 15px 0px;
@@ -112,9 +103,6 @@ a.link {
 a.link:hover {
     color: #86b140;
 }
-
-
-
 .tab {
     width: 100%;
     text-align: center;
@@ -122,24 +110,12 @@ a.link:hover {
 .tab tr {
     height: 40px;
 }
-
 .tab tr:nth-child(even) {
     background-color: #f5f5f5;
 }
 .tab .rowTitle {
     font-weight: 500;
-    
 }
-
-
-
-
-
-
-
-
-
-
 /*-------------------------------------------------------*/
 /*style formularzy */
 /*-------------------------------------------------------*/
@@ -165,7 +141,6 @@ input {
     background-color: #f5f5f5;
     border: 1px solid #ccc;
 }
-
 button.green-btn{
     padding: 7px;
     background-color: #86b140;
@@ -178,9 +153,6 @@ button.green-btn{
 button.green-btn:hover {
     color: #232323;
 }
-
-
-
 button.green-btn-min,
 a.green-btn-min {
     padding: 5px 7px;
@@ -196,18 +168,6 @@ a.green-btn-min:hover {
     color: #232323;
 }
 /*-------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
 /*-------------------------------------------------------*/
 @font-face {
     font-family: 'Open Sans';
@@ -244,13 +204,11 @@ a.green-btn-min:hover {
     font-display: swap;
     src: url('./fonts/OpenSans-ExtraBold.ttf');
 }
-
 .dashboardBlock {
     margin: 20px 0;
     float: left;
     width: 100%;
 }
-
 .dashboardTab {
     width: 20%;
     height: 50px;
