@@ -46,11 +46,18 @@ a {
     color: #232323;
 }
 .appHeader {
-    padding: 20px 0px 30px;
+    padding: 50px 0px 0px;
     font-size: 30px;
     font-weight: 600;
 }
+.logo_mord{
 
+    display: block;
+    margin-left: 0 ;
+    margin-right: auto;
+    width: 30%;
+    height: 30%;
+}
 
 #nav {
     padding: 10px 0px;
@@ -253,13 +260,12 @@ a.green-btn-min:hover {
     float: left;
 }
 .dashboardTab:hover{
-    font-size:105%;
+    opacity: 0.9;
 }
 .dashboardContent {
     background: #86b140;
     border: 1px solid black;
     margin: 0 20px;
-    border-radius: 10%;
     height: 100%;
     display: flex;
     justify-content: center;
