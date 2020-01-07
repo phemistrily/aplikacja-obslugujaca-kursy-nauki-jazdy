@@ -135,12 +135,13 @@ input, select, textarea, button {
     width: 100%;
     box-sizing: border-box;
 }
-input {
+input, select {
     padding: 7px 10px;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
 }
-button.green-btn{
+button.green-btn,
+input.green-btn {
     padding: 7px;
     background-color: #86b140;
     color: #fff;
@@ -149,7 +150,8 @@ button.green-btn{
     font-weight: 500;
     transition: 200ms;
 }
-button.green-btn:hover {
+button.green-btn:hover,
+input.green-btn:hover {
     color: #232323;
 }
 button.green-btn-min,

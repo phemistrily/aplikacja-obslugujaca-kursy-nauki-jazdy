@@ -7,33 +7,45 @@
 {/if}
 
 <div class="headline">Samochód {$applicationData.car.0.numerRejestracyjny}</div>
-
+<div class="formArea">
 <form method="POST" action="/">
   {foreach from=$applicationData.car key=key item=row}
+  <div class="formDiv">
     <label>Marka</label>
     <input type="text" name="marka" value="{$row.marka}" />
+  </div>
+  <div class="formDiv">
     <label>Model</label>
     <input type="text" name="model" value="{$row.model}" />
+  </div>
+  <div class="formDiv">
     <label>Rok produkcji</label>
     <input type="number" name="rokProdukcji" value="{$row.rokProdukcji}" />
+  </div>
+  <div class="formDiv">
     <label>Numer rejestracyjny</label>
     <input type="text" name="numerRejestracyjny" value="{$row.numerRejestracyjny}" />
+  </div>
+  <div class="formDiv">
     <label>VIN</label>
     <input type="text" name="vin" value="{$row.vin}"/>
+  </div>
+  <div class="formDiv">
     <label>Status</label>
     <select name="status">
       <option value="sprawny"{if $row.status eq sprawny}selected{/if}>sprawny</option>
       <option value="uszkodzony"{if $row.status eq uszkodzony}selected{/if}>uszkodzony</option>
       <option value="naprawiany" {if $row.status eq naprawiany}selected{/if}>naprawiany</option>
     </select>
-    <br />
-    <br />
+  </div>
+  <div class="formDiv">
+      <input type="hidden" name="id" value="{$row.idSamochod}">
+      <input type="hidden" name="form" value="editCar"/>
+      <input type="submit" value="Zapisz" class="green-btn"/>
+  </div>
   {/foreach}
-  <input type="hidden" name="id" value="{$row.idSamochod}">
-  <input type="hidden" name="form" value="editCar"/>
-  <input type="submit" value="Zapisz"/>
 </form>
-
+</div>
 
 {include file="layout/footer.html"}
 
