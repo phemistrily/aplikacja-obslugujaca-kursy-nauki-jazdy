@@ -40,7 +40,7 @@ a {
     color: #232323;
 }
 .appHeader {
-    padding: 50px 0px 0px;
+    padding: 0px;
     font-size: 30px;
     font-weight: 600;
 }
@@ -53,8 +53,7 @@ a {
     display: block;
     margin-left: 0 ;
     margin-right: auto;
-    width: 30%;
-    height: 30%;
+    width: 220px;
 }
 #nav {
     padding: 10px 0px;
