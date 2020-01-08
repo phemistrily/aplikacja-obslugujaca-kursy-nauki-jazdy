@@ -1,31 +1,26 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 03 Sty 2020, 15:50
--- Wersja serwera: 10.4.8-MariaDB
--- Wersja PHP: 7.3.10
+-- Czas generowania: 07 Sty 2020, 23:34
+-- Wersja serwera: 10.4.10-MariaDB
+-- Wersja PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Baza danych: `mord`
 --
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `dokument`
---
-
-CREATE TABLE `dokument` (
-  `idDokument` int(10) UNSIGNED NOT NULL,
-  `typDokumentu` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,14 +45,7 @@ CREATE TABLE `egzamin` (
 
 INSERT INTO `egzamin` (`idEgzamin`, `data`, `typ`, `wynik`, `idKategoria`, `idInstruktor`, `idSamochod`, `selected`) VALUES
 (1, '2019-12-10 00:00:00', 'praktyczny', 'negatywny', 6, 4, 1, 1),
-(2, '2019-12-17 00:00:00', 'praktyczny', 'pozytywny', 6, 4, 1, 1),
-(3, '2020-01-20 09:00:00', 'praktyczny', '', 0, 0, 0, 1),
-(4, '2020-01-20 10:00:00', 'praktyczny', '', 0, 0, 0, 0),
-(5, '2020-01-22 11:00:00', 'praktyczny', '', 0, 0, 0, 0),
-(6, '2020-01-22 13:00:00', 'praktyczny', '', 0, 0, 0, 0),
-(7, '2020-01-23 08:00:00', 'praktyczny', '', 0, 0, 0, 0),
-(8, '2020-01-15 09:00:00', 'teoretyczny', '', 0, 0, 0, 1),
-(9, '2020-01-15 11:00:00', 'teoretyczny', '', 0, 0, 0, 0);
+(2, '2019-12-17 00:00:00', 'praktyczny', 'pozytywny', 6, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -79,23 +67,6 @@ CREATE TABLE `incydent` (
 
 INSERT INTO `incydent` (`idIncydent`, `typIncydentu`, `dataRozpoczeciaIncydentu`, `dataZakonczeniaIncydentu`, `idSamochod`) VALUES
 (1, 'stłuczka', '2019-12-30', '2019-12-30', 2);
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `instruktor`
---
-
-CREATE TABLE `instruktor` (
-  `idInstruktor` int(10) UNSIGNED NOT NULL,
-  `imie` varchar(20) NOT NULL,
-  `nazwisko` varchar(20) NOT NULL,
-  `dataUrodzenia` date NOT NULL,
-  `pesel` varchar(11) NOT NULL,
-  `adresZamieszkania` varchar(255) NOT NULL,
-  `numerTelefonu` varchar(9) NOT NULL,
-  `adresEmail` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -142,7 +113,8 @@ CREATE TABLE `jazdaszkoleniowa` (
 --
 
 INSERT INTO `jazdaszkoleniowa` (`idJazdaSzkoleniowa`, `data`, `godzinaRozpoczecia`, `godzinaZakonczenia`, `idKursant`, `idSamochod`, `idInstruktor`, `status`, `buy`) VALUES
-(20, '2020-01-30', '10:00:00', '12:00:00', 8, 3, 4, 0, 0);
+(20, '2020-01-30', '10:00:00', '12:00:00', 8, 3, 4, 0, 0),
+(21, '2020-01-10', '02:12:00', '12:12:00', 8, 3, 4, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -196,40 +168,23 @@ CREATE TABLE `kategoriauprawnien` (
 --
 
 INSERT INTO `kategoriauprawnien` (`idKategoriaUprawnien`, `nazwa`) VALUES
-(1, 'AM'),
+(4, 'A'),
 (2, 'A1'),
 (3, 'A2'),
-(4, 'A'),
-(5, 'B1'),
+(1, 'AM'),
 (6, 'B'),
 (7, 'B+E'),
+(5, 'B1'),
 (8, 'C'),
+(11, 'C+E'),
 (9, 'C1'),
 (10, 'C1+E'),
-(11, 'C+E'),
 (12, 'D'),
+(15, 'D+E'),
 (13, 'D1'),
 (14, 'D1+E'),
-(15, 'D+E'),
 (16, 'T'),
 (17, 'Tramwaj');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `kursant`
---
-
-CREATE TABLE `kursant` (
-  `idKursant` int(10) UNSIGNED NOT NULL,
-  `ime` varchar(20) NOT NULL,
-  `nazwisko` varchar(20) NOT NULL,
-  `dataUrodzenia` date NOT NULL,
-  `pesel` varchar(11) NOT NULL,
-  `adresZamieszkania` varchar(255) NOT NULL,
-  `numerTelefonu` varchar(9) NOT NULL,
-  `adresEmail` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -240,18 +195,17 @@ CREATE TABLE `kursant` (
 CREATE TABLE `kursantegzamin` (
   `idKursantEgzamin` int(10) UNSIGNED NOT NULL,
   `idKursant` int(10) UNSIGNED NOT NULL,
-  `idEgzamin` int(10) UNSIGNED NOT NULL
+  `idEgzamin` int(10) UNSIGNED NOT NULL,
+  `idEgzaminator` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `kursantegzamin`
 --
 
-INSERT INTO `kursantegzamin` (`idKursantEgzamin`, `idKursant`, `idEgzamin`) VALUES
-(1, 2, 1),
-(2, 2, 2),
-(3, 2, 8),
-(4, 2, 3);
+INSERT INTO `kursantegzamin` (`idKursantEgzamin`, `idKursant`, `idEgzamin`, `idEgzaminator`) VALUES
+(1, 2, 1, 0),
+(2, 2, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -266,15 +220,17 @@ CREATE TABLE `kursantkursprawajazdy` (
   `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
   `idInstruktor` int(10) UNSIGNED NOT NULL,
   `idSamochod` int(10) UNSIGNED NOT NULL,
-  `rezygnacja` tinyint(3) UNSIGNED NOT NULL
+  `rezygnacja` tinyint(3) UNSIGNED NOT NULL,
+  `opinia` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `kursantkursprawajazdy`
 --
 
-INSERT INTO `kursantkursprawajazdy` (`idKursantKursPrawaJazdy`, `idKursant`, `idKursPrawaJazdy`, `createdDate`, `idInstruktor`, `idSamochod`, `rezygnacja`) VALUES
-(34, 8, 1, '2019-12-31 14:31:29', 4, 3, 0);
+INSERT INTO `kursantkursprawajazdy` (`idKursantKursPrawaJazdy`, `idKursant`, `idKursPrawaJazdy`, `createdDate`, `idInstruktor`, `idSamochod`, `rezygnacja`, `opinia`) VALUES
+(34, 8, 1, '2019-12-31 14:31:29', 3, 3, 1, NULL),
+(35, 8, 4, '2020-01-07 22:43:20', 3, 3, 0, 'gut');
 
 -- --------------------------------------------------------
 
@@ -296,8 +252,10 @@ CREATE TABLE `kursprawajazdy` (
 --
 
 INSERT INTO `kursprawajazdy` (`idKursPrawaJazdy`, `idKategoria`, `cena`, `dataRozpoczecia`, `dataZakonczenia`, `idInstruktor`) VALUES
-(1, 6, 1200, '2020-01-12', '2020-02-09', 3),
-(2, 8, 1800, '2020-01-26', '2020-02-23', 3);
+(1, 6, 1200, '2020-01-12', '2020-02-09', 4),
+(2, 8, 1800, '2020-01-26', '2020-02-23', 3),
+(3, 8, 1990, '2020-01-15', '2020-04-23', 3),
+(4, 17, 6000, '2020-02-15', '2020-05-23', 4);
 
 -- --------------------------------------------------------
 
@@ -353,9 +311,9 @@ CREATE TABLE `platnosc` (
   `dataWplaty` date DEFAULT NULL,
   `terminPlatnosci` date NOT NULL,
   `raty` tinyint(4) NOT NULL,
-  `idKursPrawaJazdy` int(11) DEFAULT NULL,
-  `idEgzamin` int(11) DEFAULT NULL,
-  `idJazdaSzkoleniowa` int(11) DEFAULT NULL,
+  `idKursPrawaJazdy` int(10) DEFAULT NULL,
+  `idEgzamin` int(10) DEFAULT NULL,
+  `idJazdaSzkoleniowa` int(10) DEFAULT NULL,
   `rezygnacja` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -364,9 +322,11 @@ CREATE TABLE `platnosc` (
 --
 
 INSERT INTO `platnosc` (`idPlatnosc`, `idKursant`, `kwota`, `dataWplaty`, `terminPlatnosci`, `raty`, `idKursPrawaJazdy`, `idEgzamin`, `idJazdaSzkoleniowa`, `rezygnacja`) VALUES
-(22, 8, 1200, '2019-12-31', '2020-02-11', 1, 1, NULL, NULL, 0),
+(22, 8, 1200, '2019-12-31', '2020-02-11', 1, 1, NULL, NULL, 1),
 (23, 2, 30, NULL, '2020-01-06', 0, NULL, 8, NULL, 0),
-(24, 2, 140, '2020-01-03', '2020-01-06', 0, NULL, 3, NULL, 0);
+(24, 2, 140, '2020-01-03', '2020-01-06', 0, NULL, 3, NULL, 0),
+(25, 8, 6000, '2020-01-07', '2020-03-16', 1, 4, NULL, NULL, 0),
+(26, 8, 300, '2020-01-07', '2020-01-10', 0, NULL, NULL, 21, 0);
 
 -- --------------------------------------------------------
 
@@ -389,9 +349,12 @@ CREATE TABLE `raty` (
 --
 
 INSERT INTO `raty` (`idRaty`, `idPlatnosc`, `kwota`, `dataWplaty`, `terminPlatnosci`, `idKursant`, `rezygnacja`) VALUES
-(55, 22, 400, '2019-12-31', '2020-01-22', 8, 0),
-(56, 22, 400, '2019-12-31', '2020-02-01', 8, 0),
-(57, 22, 400, '2019-12-31', '2020-02-11', 8, 0);
+(55, 22, 400, '2019-12-31', '2020-01-22', 8, 1),
+(56, 22, 400, '2019-12-31', '2020-02-01', 8, 1),
+(57, 22, 400, '2019-12-31', '2020-02-11', 8, 1),
+(58, 25, 2000, '2020-01-07', '2020-02-25', 8, 0),
+(59, 25, 2000, '2020-01-07', '2020-03-06', 8, 0),
+(60, 25, 2000, '2020-01-07', '2020-03-16', 8, 0);
 
 -- --------------------------------------------------------
 
@@ -405,18 +368,19 @@ CREATE TABLE `samochod` (
   `model` varchar(50) NOT NULL,
   `rokProdukcji` year(4) NOT NULL,
   `numerRejestracyjny` varchar(10) NOT NULL,
-  `vin` varchar(20) NOT NULL
+  `vin` varchar(20) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'sprawny'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `samochod`
 --
 
-INSERT INTO `samochod` (`idSamochod`, `marka`, `model`, `rokProdukcji`, `numerRejestracyjny`, `vin`) VALUES
-(1, 'Opel', 'Astra', 2007, 'KNS0023', '123321'),
-(2, 'Suzuki', 'Baleno', 2013, 'KNS00267', '13333321'),
-(3, 'Fiat', 'Punto', 2009, '123333', '242424242'),
-(4, 'Hyundai', 'i30', 2013, 'Sz323', '97011509832');
+INSERT INTO `samochod` (`idSamochod`, `marka`, `model`, `rokProdukcji`, `numerRejestracyjny`, `vin`, `status`) VALUES
+(1, 'Opel', 'Astra', 2007, 'KNS0023', '123321', 'sprawny'),
+(2, 'Suzuki', 'Baleno', 2013, 'KNS00267', '13333321', 'sprawny'),
+(3, 'Fiat', 'Punto', 2009, '123333', '242424242', 'sprawny'),
+(4, 'Hyundai', 'i30', 2013, 'Sz323', '97011509832', 'sprawny');
 
 -- --------------------------------------------------------
 
@@ -443,7 +407,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `imie`, `nazwisko`, `dataUrodzenia`, `pesel`, `adresZamieszkania`, `numerTelefonu`, `typKonta`) VALUES
 (1, 'admin@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', '', '', '0000-00-00', '', '', '', 'admin'),
-(2, 'kowalski@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'jan', 'kowalski', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
+(2, 'kowalski@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'Jan', 'kowalski', '1999-10-10', '99101010203', 'wieliczka', '100200300', 'kursant'),
 (3, 'gil@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'jan', 'gil', '1980-08-15', '80081510203', 'kraków', '100200301', 'instruktor'),
 (4, 'lis@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'jan', 'lis', '1975-09-02', '75090210203', 'nowy sącz', '100200302', 'instruktor'),
 (8, 'dawid@mord.pl', 'ab2467706ba38309fafcc9d86d79291eacbaaed1', 'dawid', 'kotlarz', '1997-09-30', '97093012345', 'limanowa', '100500300', 'kursant');
@@ -451,12 +415,6 @@ INSERT INTO `users` (`id`, `email`, `password`, `imie`, `nazwisko`, `dataUrodzen
 --
 -- Indeksy dla zrzutów tabel
 --
-
---
--- Indeksy dla tabeli `dokument`
---
-ALTER TABLE `dokument`
-  ADD PRIMARY KEY (`idDokument`);
 
 --
 -- Indeksy dla tabeli `egzamin`
@@ -469,12 +427,6 @@ ALTER TABLE `egzamin`
 --
 ALTER TABLE `incydent`
   ADD PRIMARY KEY (`idIncydent`);
-
---
--- Indeksy dla tabeli `instruktor`
---
-ALTER TABLE `instruktor`
-  ADD PRIMARY KEY (`idInstruktor`);
 
 --
 -- Indeksy dla tabeli `instruktorkategoriauprawnien`
@@ -492,19 +444,15 @@ ALTER TABLE `jazdaszkoleniowa`
 -- Indeksy dla tabeli `kategoria`
 --
 ALTER TABLE `kategoria`
-  ADD PRIMARY KEY (`idKategoria`);
+  ADD PRIMARY KEY (`idKategoria`),
+  ADD KEY `idx_nazwa_kategorii` (`nazwa`);
 
 --
 -- Indeksy dla tabeli `kategoriauprawnien`
 --
 ALTER TABLE `kategoriauprawnien`
-  ADD PRIMARY KEY (`idKategoriaUprawnien`);
-
---
--- Indeksy dla tabeli `kursant`
---
-ALTER TABLE `kursant`
-  ADD PRIMARY KEY (`idKursant`);
+  ADD PRIMARY KEY (`idKategoriaUprawnien`),
+  ADD KEY `idx_nazwa_kategoriiUPR` (`nazwa`);
 
 --
 -- Indeksy dla tabeli `kursantegzamin`
@@ -558,17 +506,12 @@ ALTER TABLE `samochod`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_imie_nazwisko` (`imie`,`nazwisko`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla tabel zrzutów
 --
-
---
--- AUTO_INCREMENT dla tabeli `dokument`
---
-ALTER TABLE `dokument`
-  MODIFY `idDokument` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `egzamin`
@@ -583,12 +526,6 @@ ALTER TABLE `incydent`
   MODIFY `idIncydent` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT dla tabeli `instruktor`
---
-ALTER TABLE `instruktor`
-  MODIFY `idInstruktor` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT dla tabeli `instruktorkategoriauprawnien`
 --
 ALTER TABLE `instruktorkategoriauprawnien`
@@ -598,7 +535,7 @@ ALTER TABLE `instruktorkategoriauprawnien`
 -- AUTO_INCREMENT dla tabeli `jazdaszkoleniowa`
 --
 ALTER TABLE `jazdaszkoleniowa`
-  MODIFY `idJazdaSzkoleniowa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idJazdaSzkoleniowa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT dla tabeli `kategoria`
@@ -613,12 +550,6 @@ ALTER TABLE `kategoriauprawnien`
   MODIFY `idKategoriaUprawnien` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT dla tabeli `kursant`
---
-ALTER TABLE `kursant`
-  MODIFY `idKursant` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT dla tabeli `kursantegzamin`
 --
 ALTER TABLE `kursantegzamin`
@@ -628,13 +559,13 @@ ALTER TABLE `kursantegzamin`
 -- AUTO_INCREMENT dla tabeli `kursantkursprawajazdy`
 --
 ALTER TABLE `kursantkursprawajazdy`
-  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idKursantKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT dla tabeli `kursprawajazdy`
 --
 ALTER TABLE `kursprawajazdy`
-  MODIFY `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idKursPrawaJazdy` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `licencjaegzaminator`
@@ -652,13 +583,13 @@ ALTER TABLE `licencjaegzaminatorkategoriauprawnien`
 -- AUTO_INCREMENT dla tabeli `platnosc`
 --
 ALTER TABLE `platnosc`
-  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idPlatnosc` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT dla tabeli `raty`
 --
 ALTER TABLE `raty`
-  MODIFY `idRaty` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `idRaty` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT dla tabeli `samochod`
@@ -671,10 +602,91 @@ ALTER TABLE `samochod`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `egzamin`
+--
+ALTER TABLE `egzamin`
+  ADD CONSTRAINT `egzamin_ibfk_1` FOREIGN KEY (`idKategoria`) REFERENCES `kategoria` (`idKategoria`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `egzamin_ibfk_2` FOREIGN KEY (`idInstruktor`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `egzamin_ibfk_3` FOREIGN KEY (`idSamochod`) REFERENCES `samochod` (`idSamochod`);
+
+--
+-- Ograniczenia dla tabeli `incydent`
+--
+ALTER TABLE `incydent`
+  ADD CONSTRAINT `incydent_ibfk_1` FOREIGN KEY (`idSamochod`) REFERENCES `samochod` (`idSamochod`) ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `instruktorkategoriauprawnien`
+--
+ALTER TABLE `instruktorkategoriauprawnien`
+  ADD CONSTRAINT `instruktorkategoriauprawnien_ibfk_1` FOREIGN KEY (`idInstruktor`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `instruktorkategoriauprawnien_ibfk_2` FOREIGN KEY (`idKategoriaUprawnien`) REFERENCES `kategoriauprawnien` (`idKategoriaUprawnien`);
+
+--
+-- Ograniczenia dla tabeli `jazdaszkoleniowa`
+--
+ALTER TABLE `jazdaszkoleniowa`
+  ADD CONSTRAINT `jazdaszkoleniowa_ibfk_1` FOREIGN KEY (`idInstruktor`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `jazdaszkoleniowa_ibfk_2` FOREIGN KEY (`idKursant`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `jazdaszkoleniowa_ibfk_3` FOREIGN KEY (`idSamochod`) REFERENCES `samochod` (`idSamochod`);
+
+--
+-- Ograniczenia dla tabeli `kursantegzamin`
+--
+ALTER TABLE `kursantegzamin`
+  ADD CONSTRAINT `kursantegzamin_ibfk_1` FOREIGN KEY (`idKursant`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `kursantegzamin_ibfk_2` FOREIGN KEY (`idEgzamin`) REFERENCES `egzamin` (`idEgzamin`) ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `kursantkursprawajazdy`
+--
+ALTER TABLE `kursantkursprawajazdy`
+  ADD CONSTRAINT `kursantkursprawajazdy_ibfk_1` FOREIGN KEY (`idInstruktor`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `kursantkursprawajazdy_ibfk_2` FOREIGN KEY (`idKursant`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `kursantkursprawajazdy_ibfk_3` FOREIGN KEY (`idSamochod`) REFERENCES `samochod` (`idSamochod`),
+  ADD CONSTRAINT `kursantkursprawajazdy_ibfk_4` FOREIGN KEY (`idKursPrawaJazdy`) REFERENCES `kursprawajazdy` (`idKursPrawaJazdy`) ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `kursprawajazdy`
+--
+ALTER TABLE `kursprawajazdy`
+  ADD CONSTRAINT `kursprawajazdy_ibfk_1` FOREIGN KEY (`idKategoria`) REFERENCES `kategoria` (`idKategoria`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `kursprawajazdy_ibfk_2` FOREIGN KEY (`idInstruktor`) REFERENCES `users` (`id`);
+
+--
+-- Ograniczenia dla tabeli `licencjaegzaminator`
+--
+ALTER TABLE `licencjaegzaminator`
+  ADD CONSTRAINT `licencjaegzaminator_ibfk_1` FOREIGN KEY (`idInstruktor`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `licencjaegzaminator_ibfk_2` FOREIGN KEY (`idLicencjaEgzaminator`) REFERENCES `users` (`id`);
+
+--
+-- Ograniczenia dla tabeli `licencjaegzaminatorkategoriauprawnien`
+--
+ALTER TABLE `licencjaegzaminatorkategoriauprawnien`
+  ADD CONSTRAINT `licencjaegzaminatorkategoriauprawnien_ibfk_1` FOREIGN KEY (`idLicencjaEgzaminator`) REFERENCES `licencjaegzaminator` (`idLicencjaEgzaminator`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `licencjaegzaminatorkategoriauprawnien_ibfk_2` FOREIGN KEY (`idKategoriaUprawnien`) REFERENCES `kategoriauprawnien` (`idKategoriaUprawnien`);
+
+--
+-- Ograniczenia dla tabeli `platnosc`
+--
+ALTER TABLE `platnosc`
+  ADD CONSTRAINT `platnosc_ibfk_1` FOREIGN KEY (`idKursant`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `raty`
+--
+ALTER TABLE `raty`
+  ADD CONSTRAINT `raty_ibfk_1` FOREIGN KEY (`idPlatnosc`) REFERENCES `platnosc` (`idPlatnosc`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `raty_ibfk_2` FOREIGN KEY (`idKursant`) REFERENCES `users` (`id`);
 COMMIT;
 
-ALTER TABLE `mord`.`samochod` 
-ADD COLUMN `status` VARCHAR(50) NOT NULL DEFAULT 'sprawny' AFTER `vin`;
-
-ALTER TABLE `mord`.`kursantkursprawajazdy` 
-ADD COLUMN `opinia` TEXT NULL AFTER `rezygnacja`;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
