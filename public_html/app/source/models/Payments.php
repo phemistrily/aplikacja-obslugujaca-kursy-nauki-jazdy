@@ -74,7 +74,7 @@ class Payments
             'dataWplaty' => $paymentDate,
             'platnoscId' => $paymentData['platnoscId']
         ];
-        $query = "UPDATE platnosc SET dataWplaty = :dataWplaty  WHERE idPlatnosc = :platnoscId";
+        $query = "UPDATE platnosc SET oplacone = 1 ,dataWplaty = :dataWplaty  WHERE idPlatnosc = :platnoscId";
         Sql::$sql1->run($query, $params);
         return true;
     }

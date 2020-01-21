@@ -62,11 +62,11 @@
       <td>-</td>
     {/if}
 
-    {if $row.raty == 1 && $row.dataWplaty == NULL}
+    {if $row.raty == 1 && $row.oplacone eq 0}
       <td colspan="2"><a href="/?mod=mojeraty" class="green-btn-min">Opłać raty</a></td>
     {else}
       <td>
-        {if $row.dataWplaty == NULL}
+        {if $row.oplacone eq 0}
           <form action="/" method="POST">
             <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
             <button name="form" value="paymentCourse" type="submit" class="green-btn-min">Opłać</button>
@@ -74,7 +74,7 @@
         {/if}
       </td>
       <td>
-        {if $row.idKursPrawaJazdy != 0 && $row.dataWplaty == NULL}
+        {if $row.idKursPrawaJazdy != 0 && $row.oplacone eq 0}
           <form action="/" method="POST">
             <input type="hidden" name="platnoscId" value="{$row.idPlatnosc}">
             <input type="hidden" name="platnoscKwota" value="{$row.kwota}">

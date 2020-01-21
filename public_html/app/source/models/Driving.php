@@ -11,7 +11,14 @@ class Driving
         $params = [
             'kursantId' => $_SESSION['userId']
         ];
-        $query = "SELECT js.*, u.imie as imieI, u.nazwisko as nazwiskoI, CONCAT(s.marka,' ',s.model) AS samochod FROM jazdaszkoleniowa js INNER JOIN users u ON u.id = js.idInstruktor INNER JOIN samochod s ON s.idSamochod = js.idSamochod WHERE js.idKursant = 8";
+        $query = "SELECT js.*, 
+        u.imie as imieI, 
+        u.nazwisko as nazwiskoI, 
+        CONCAT(s.marka,' ',s.model) AS samochod 
+        FROM jazdaszkoleniowa js 
+        INNER JOIN users u ON u.id = js.idInstruktor 
+        INNER JOIN samochod s ON s.idSamochod = js.idSamochod 
+        WHERE js.idKursant = :kursantId";
         Sql::$sql1->run($query, $params);
         return Sql::$sql1->toArray();
     }
@@ -22,7 +29,10 @@ class Driving
             'kursantId' => $_SESSION['userId'],
         ];
 
-        $query = "SELECT idInstruktor, idSamochod FROM kursantkursprawajazdy WHERE idKursant = :kursantId AND rezygnacja != 1";
+        $query = "SELECT idInstruktor, 
+        idSamochod 
+        FROM kursantkursprawajazdy 
+        WHERE idKursant = :kursantId AND rezygnacja != 1";
         Sql::$sql1->run($query, $params);
         $rowIdInstruktor = Sql::$sql1->toArray();
         
@@ -35,7 +45,13 @@ class Driving
             'samochodId' => $rowIdInstruktor[0]['idSamochod']
         ];
 
-        $query = "INSERT INTO jazdaszkoleniowa(data, godzinaRozpoczecia, godzinaZakonczenia, idKursant, idInstruktor, idSamochod) VALUES(:dataJazdy, :godzStart, :godzStop, :kursantId, :instruktorId, :samochodId)";
+        $query = "INSERT INTO jazdaszkoleniowa(data, 
+        godzinaRozpoczecia, 
+        godzinaZakonczenia, 
+        idKursant, 
+        idInstruktor, 
+        idSamochod) 
+        VALUES(:dataJazdy, :godzStart, :godzStop, :kursantId, :instruktorId, :samochodId)";
         Sql::$sql1->run($query, $params);
 
         return true;
@@ -47,7 +63,9 @@ class Driving
             'kursantId' => $_SESSION['userId'],
         ];
 
-        $query = "SELECT idInstruktor, idSamochod FROM kursantkursprawajazdy WHERE idKursant = :kursantId AND rezygnacja != 1";
+        $query = "SELECT idInstruktor, 
+        idSamochod FROM kursantkursprawajazdy 
+        WHERE idKursant = :kursantId AND rezygnacja != 1";
         Sql::$sql1->run($query, $params);
         $rowIdInstruktor = Sql::$sql1->toArray();
         
@@ -74,7 +92,9 @@ class Driving
         $params = [
             'kursantId' => $_SESSION['userId'],
         ];
-        $query = "SELECT idJazdaSzkoleniowa FROM jazdaszkoleniowa WHERE idKursant = :kursantId AND buy = 1 ORDER BY idJazdaSzkoleniowa DESC LIMIT 1";
+        $query = "SELECT idJazdaSzkoleniowa 
+        FROM jazdaszkoleniowa 
+        WHERE idKursant = :kursantId AND buy = 1 ORDER BY idJazdaSzkoleniowa DESC LIMIT 1";
         Sql::$sql1->run($query, $params);
         $rowIdDriving = Sql::$sql1->toArray();
         
@@ -84,7 +104,8 @@ class Driving
             'kwota' => $drivingPrice,
             'terminPlatnosci' => $terminPlatnosci
         ];
-        $query = "INSERT INTO platnosc(idKursant, kwota, terminPlatnosci, idJazdaSzkoleniowa) VALUES(:kursantId, :kwota, :terminPlatnosci, :jazdaSzkoleniowaId)";
+        $query = "INSERT INTO platnosc(idKursant, kwota, terminPlatnosci, idJazdaSzkoleniowa) 
+        VALUES(:kursantId, :kwota, :terminPlatnosci, :jazdaSzkoleniowaId)";
         Sql::$sql1->run($query, $params);
         
         return true;

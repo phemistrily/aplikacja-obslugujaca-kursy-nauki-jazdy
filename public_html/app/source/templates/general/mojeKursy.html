@@ -38,9 +38,11 @@
     <td>{$row.instruktorKursu}</td>
     <td>{$row.instruktorJazd}</td>
     <td>{$row.createdDate}</td>
-    <td>nie</td>
+    <td>{if $row.oplacone eq 0}nie{else}tak{/if}</td>
     <td>
+      {if $row.oplacone eq 0}
       <a href="/?mod=mojeplatnosci" class="green-btn-min">Opłać</a>
+      {/if}
       <!--
       <form action="/" method="POST">
         <input type="hidden" name="kursId" value="{$row.idKursPrawaJazdy}">
@@ -48,11 +50,13 @@
       </form>-->
     </td>
     <td>
+      {if empty($row.opinia)}
       <a
         href="/?mod=opiniaKurs&id={$row.idKursantKursPrawaJazdy}"
         class="green-btn-min"
         >Dodaj&nbsp;opinię</a
       >
+      {/if}
     </td>
     <td>
       <form action="/" method="POST">

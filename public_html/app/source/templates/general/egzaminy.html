@@ -1,8 +1,10 @@
 {include file="layout/header.html"}
 
 
+{if $systemData.session.typKonta eq 'admin'}
+<a class="buttonedit" href="?mod=dodajEgzamin">Dodaj nowy termin egzaminu</a>
+{/if}
 <div class="headline">Egzaminy</div>
-
 {if !empty($applicationData.examsList)}
 <table class="tab">
   <tr class="rowTitle">

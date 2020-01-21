@@ -95,4 +95,16 @@ class ExamsController extends BaseController
       parent::redirect('?msg=w_somethingHappened');
     }
   }
+
+  public function addExamView()
+  {
+    ModuleController::$applicationData = parent::$applicationData;
+    ModuleController::$template = 'dodajEgzamin';
+  }
+
+  public function addExam($post)
+  {
+    $this->exams->addExam($post);
+    parent::redirect('?mod=mojeegzaminy');
+  }
 }

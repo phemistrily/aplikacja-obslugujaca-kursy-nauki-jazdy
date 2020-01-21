@@ -1,0 +1,24 @@
+{include file="layout/header.html"}
+
+
+<div class="headline">Dodaj Nowy termin egzaminu</div>
+
+<form action="/" method="post">
+    Termin egzaminu
+    <input type="datetime-local" name="date">
+    Typ egzaminu
+    <select name="type" >
+        <option value="teoretyczny">teoretyczny</option>
+        <option value="praktyczny">praktyczny</option>
+    </select>
+    <input type="hidden" name="form" value="addExam">
+    <br />
+    <br />
+    <br />
+    <input class="buttonedit" type="submit" value="Dodaj nowy egzamin">
+</form>
+
+
+
+{include file="layout/footer.html"}
+

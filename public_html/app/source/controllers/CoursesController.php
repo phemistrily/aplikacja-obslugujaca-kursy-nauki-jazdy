@@ -24,7 +24,7 @@ class CoursesController extends BaseController
   public function myCoursesView(){
     parent::$applicationData['headTitle'] = 'MORD | Moje kursy';
 
-    parent::$applicationData['myCoursesList'] = $this->courses->getMyCoursesList();
+  parent::$applicationData['myCoursesList'] = $this->courses->getMyCoursesList();
     
     ModuleController::$applicationData = parent::$applicationData;
     ModuleController::$template = 'mojeKursy';
@@ -74,7 +74,6 @@ class CoursesController extends BaseController
 
   public function addOpinionCourse($post)
   {
-    var_dump($post);
     $this->courses->editCourseUser($post);
     parent::redirect('?mod=mojekursy&msg=s_addOpinion');
   }

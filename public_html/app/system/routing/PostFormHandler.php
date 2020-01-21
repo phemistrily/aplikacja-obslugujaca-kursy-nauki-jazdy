@@ -128,6 +128,11 @@ class PostFormHandler extends Handler
         $this->controller->nieZaliczExam($_POST);
         die();
         break;
+      case 'addExam':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->addExam($_POST);
+        break;
       default:
         # code...
         break;

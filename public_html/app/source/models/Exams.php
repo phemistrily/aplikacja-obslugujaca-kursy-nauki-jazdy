@@ -63,10 +63,10 @@ class Exams
         uk.nazwisko as nazwiskoK,
         IF(e.data > NOW(), 0, 1) as dataStart
         FROM egzamin e 
-        INNER JOIN kategoria k ON k.idKategoria = e.idKategoria 
+        LEFT JOIN kategoria k ON k.idKategoria = e.idKategoria 
         INNER JOIN users ui ON ui.id = e.idInstruktor 
         INNER JOIN kursantegzamin ke ON ke.idEgzamin = e.idEgzamin 
-        INNER JOIN users uk ON uk.id = ke.idKursant WHERE ke.idEgzaminator = :instruktorId
+        INNER JOIN users uk ON uk.id = ke.idKursant WHERE e.idInstruktor = :instruktorId
         ";
 
         Sql::$sql1->run($query,$parms);
@@ -215,6 +215,14 @@ class Exams
         $query = "UPDATE egzamin SET wynik = 'negatywny' WHERE idEgzamin = :egzaminId";
         
         Sql::$sql1->run($query, $parms);
+        return true;
+    }
+
+    public function addExam($examData)
+    {
+        $examData['date'] = str_replace('T', ' ',$examData['date']).':00';
+        $query = "CALL addNewEgzaminDate('".$examData['date']."','".$examData['type']."')";
+        Sql::$sql1->run($query);
         return true;
     }
 }

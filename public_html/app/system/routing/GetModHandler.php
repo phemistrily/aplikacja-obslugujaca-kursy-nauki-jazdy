@@ -135,7 +135,11 @@ class GetModHandler extends Handler
         $this->controller = new CoursesController();
         $this->controller->setOpinionView();
         break;
-
+      case 'dodajEgzamin':
+        parent::controller('Exams');
+        $this->controller = new ExamsController();
+        $this->controller->addExamView();
+        break;
         
 
       default:
